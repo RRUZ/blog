@@ -1,0 +1,75 @@
+object Form25: TForm25
+  Left = 0
+  Top = 0
+  Caption = 'Running Applications'
+  ClientHeight = 449
+  ClientWidth = 773
+  Position = poScreenCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [dkDesktop, dkiPhone, dkiPad]
+  OnCreate = FormCreate
+  DesignerMobile = False
+  DesignerWidth = 0
+  DesignerHeight = 0
+  DesignerDeviceName = ''
+  DesignerOrientation = 0
+  object StringGrid1: TStringGrid
+    Align = alClient
+    Height = 449.000000000000000000
+    ShowSizeGrip = True
+    TabOrder = 0
+    Width = 773.000000000000000000
+    AlternatingRowBackground = True
+    RowCount = 100
+    RowHeight = 21.000000000000000000
+    object StringColumn1: TStringColumn
+      Header = 'PID'
+      Height = 441.000000000000000000
+      TabOrder = 0
+      Width = 100.000000000000000000
+    end
+    object StringColumn2: TStringColumn
+      Header = 'Date Launched'
+      Height = 441.000000000000000000
+      Position.X = 100.000000000000000000
+      TabOrder = 1
+      Width = 100.000000000000000000
+    end
+    object StringColumn3: TStringColumn
+      Header = 'Name'
+      Height = 441.000000000000000000
+      Position.X = 200.000000000000000000
+      TabOrder = 2
+      Width = 100.000000000000000000
+    end
+    object StringColumn4: TStringColumn
+      Header = 'Path'
+      Height = 441.000000000000000000
+      Position.X = 300.000000000000000000
+      TabOrder = 3
+      Width = 100.000000000000000000
+    end
+    object StringColumn5: TStringColumn
+      Header = 'Bundle Id'
+      Height = 441.000000000000000000
+      Position.X = 400.000000000000000000
+      TabOrder = 4
+      Width = 100.000000000000000000
+    end
+    object StringColumn6: TStringColumn
+      Header = 'Bundle URL'
+      Height = 441.000000000000000000
+      Position.X = 500.000000000000000000
+      TabOrder = 5
+      Width = 100.000000000000000000
+    end
+    object StringColumn7: TStringColumn
+      Header = 'Architecture'
+      Height = 441.000000000000000000
+      Position.X = 600.000000000000000000
+      TabOrder = 6
+      Width = 100.000000000000000000
+    end
+  end
+end
