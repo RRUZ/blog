@@ -1,0 +1,296 @@
+object FrmStyleEqualizer: TFrmStyleEqualizer
+  Left = 0
+  Top = 0
+  BiDiMode = bdLeftToRight
+  Caption = 'FireMonkey Style Equalizer'
+  BorderStyle = bsSingle
+  ClientHeight = 296
+  ClientWidth = 713
+  Position = poScreenCenter
+  Transparency = False
+  Visible = False
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnClose = FormClose
+  StyleLookup = 'backgroundstyle'
+  object TrackBarSat: TTrackBar
+    Position.Point = '(16,72)'
+    Width = 217.000000000000000000
+    Height = 15.000000000000000000
+    TabOrder = 0
+    BindingSource = SpinBoxSat
+    Max = 100.000000000000000000
+    Orientation = orHorizontal
+    OnChange = TrackBarHueChange
+  end
+  object TrackBarLig: TTrackBar
+    Position.Point = '(16,120)'
+    Width = 217.000000000000000000
+    Height = 15.000000000000000000
+    TabOrder = 1
+    BindingSource = TrackBarLig
+    Min = -100.000000000000000000
+    Max = 100.000000000000000000
+    Orientation = orHorizontal
+    OnChange = TrackBarHueChange
+  end
+  object Label1: TLabel
+    Position.Point = '(16,8)'
+    Width = 120.000000000000000000
+    Height = 15.000000000000000000
+    TabOrder = 2
+    Text = 'Hue'
+  end
+  object Label2: TLabel
+    Position.Point = '(16,48)'
+    Width = 120.000000000000000000
+    Height = 15.000000000000000000
+    TabOrder = 3
+    Text = 'Saturation'
+  end
+  object Label3: TLabel
+    Position.Point = '(16,96)'
+    Width = 120.000000000000000000
+    Height = 15.000000000000000000
+    TabOrder = 4
+    Text = 'Lightness'
+  end
+  object BtnApply: TButton
+    Position.Point = '(104,264)'
+    Width = 80.000000000000000000
+    Height = 22.000000000000000000
+    OnClick = BtnApplyClick
+    TabOrder = 5
+    StaysPressed = False
+    IsPressed = False
+    Text = 'Apply'
+  end
+  object BtnCancel: TButton
+    Position.Point = '(192,264)'
+    Width = 80.000000000000000000
+    Height = 22.000000000000000000
+    OnClick = BtnCancelClick
+    TabOrder = 6
+    StaysPressed = False
+    IsPressed = False
+    Text = 'Cancel'
+  end
+  object BtnSave: TButton
+    Position.Point = '(280,264)'
+    Width = 80.000000000000000000
+    Height = 22.000000000000000000
+    OnClick = BtnSaveClick
+    TabOrder = 7
+    StaysPressed = False
+    IsPressed = False
+    Text = 'Save'
+  end
+  object Log: TMemo
+    Position.Point = '(16,144)'
+    Width = 345.000000000000000000
+    Height = 105.000000000000000000
+    TabOrder = 8
+    WordWrap = False
+  end
+  object SaveDialog1: TSaveDialog
+    DefaultExt = '*.Style'
+    Filter = 'FireMonkey Style Files|*.Style'
+    Left = 112
+    Top = 176
+  end
+  object SpinBoxHue: TSpinBox
+    Position.Point = '(240,16)'
+    Width = 100.000000000000000000
+    Height = 22.000000000000000000
+    TabOrder = 9
+    BindingSource = TrackBarHue
+    ReadOnly = False
+    Min = -180.000000000000000000
+    Max = 180.000000000000000000
+    Increment = 1.000000000000000000
+    ValueType = vtInteger
+  end
+  object TrackBarHue: THueTrackBar
+    Position.Point = '(16,24)'
+    Width = 217.000000000000000000
+    Height = 15.000000000000000000
+    StyleLookup = 'trackbarstyle'
+    TabOrder = 10
+    BindingSource = SpinBoxHue
+    Min = -180.000000000000000000
+    Max = 180.000000000000000000
+    Orientation = orHorizontal
+    OnChange = TrackBarHueChange
+  end
+  object BtnRestore: TButton
+    Position.Point = '(16,264)'
+    Width = 80.000000000000000000
+    Height = 22.000000000000000000
+    OnClick = BtnRestoreClick
+    TabOrder = 11
+    StaysPressed = False
+    IsPressed = False
+    Text = 'Restore'
+  end
+  object Line1: TLine
+    Position.Point = '(40,16)'
+    Width = 189.000000000000000000
+    Height = 9.000000000000000000
+    LineType = ltTop
+  end
+  object Line2: TLine
+    Position.Point = '(74,56)'
+    Width = 154.000000000000000000
+    Height = 9.000000000000000000
+    LineType = ltTop
+  end
+  object Line3: TLine
+    Position.Point = '(72,104)'
+    Width = 156.000000000000000000
+    Height = 9.000000000000000000
+    LineType = ltTop
+  end
+  object SpinBoxSat: TSpinBox
+    Position.Point = '(240,64)'
+    Width = 100.000000000000000000
+    Height = 22.000000000000000000
+    TabOrder = 15
+    BindingSource = TrackBarSat
+    ReadOnly = False
+    Max = 100.000000000000000000
+    Increment = 1.000000000000000000
+    ValueType = vtInteger
+  end
+  object SpinBoxLig: TSpinBox
+    Position.Point = '(240,112)'
+    Width = 100.000000000000000000
+    Height = 22.000000000000000000
+    TabOrder = 16
+    BindingSource = TrackBarLig
+    ReadOnly = False
+    Min = -100.000000000000000000
+    Max = 100.000000000000000000
+    Increment = 1.000000000000000000
+    ValueType = vtInteger
+  end
+  object Timer1: TTimer
+    OnTimer = Timer1Timer
+    Left = 56
+    Top = 176
+  end
+  object Label4: TLabel
+    Position.Point = '(376,8)'
+    Width = 120.000000000000000000
+    Height = 15.000000000000000000
+    TabOrder = 17
+    Text = 'Red'
+  end
+  object Line4: TLine
+    Position.Point = '(400,16)'
+    Width = 189.000000000000000000
+    Height = 9.000000000000000000
+    LineType = ltTop
+  end
+  object TrackBarGreen: TTrackBar
+    Position.Point = '(376,72)'
+    Width = 217.000000000000000000
+    Height = 15.000000000000000000
+    TabOrder = 19
+    BindingSource = SpinBoxGreen
+    Max = 255.000000000000000000
+    Orientation = orHorizontal
+    OnChange = TrackBarRedChange
+  end
+  object Label5: TLabel
+    Position.Point = '(376,56)'
+    Width = 120.000000000000000000
+    Height = 15.000000000000000000
+    TabOrder = 20
+    Text = 'Green'
+  end
+  object Line5: TLine
+    Position.Point = '(408,64)'
+    Width = 181.000000000000000000
+    Height = 9.000000000000000000
+    LineType = ltTop
+  end
+  object TrackBarRed: TTrackBar
+    Position.Point = '(376,24)'
+    Width = 217.000000000000000000
+    Height = 15.000000000000000000
+    TabOrder = 22
+    BindingSource = SpinBoxRed
+    Max = 255.000000000000000000
+    Orientation = orHorizontal
+    OnChange = TrackBarRedChange
+  end
+  object Label6: TLabel
+    Position.Point = '(376,8)'
+    Width = 120.000000000000000000
+    Height = 15.000000000000000000
+    TabOrder = 23
+    Text = 'Red'
+  end
+  object Line6: TLine
+    Position.Point = '(400,16)'
+    Width = 189.000000000000000000
+    Height = 9.000000000000000000
+    LineType = ltTop
+  end
+  object TrackBarBlue: TTrackBar
+    Position.Point = '(376,120)'
+    Width = 217.000000000000000000
+    Height = 15.000000000000000000
+    TabOrder = 25
+    BindingSource = SpinBoxBlue
+    Max = 255.000000000000000000
+    Orientation = orHorizontal
+    OnChange = TrackBarRedChange
+  end
+  object Label7: TLabel
+    Position.Point = '(376,104)'
+    Width = 120.000000000000000000
+    Height = 15.000000000000000000
+    TabOrder = 26
+    Text = 'Blue'
+  end
+  object Line7: TLine
+    Position.Point = '(400,112)'
+    Width = 189.000000000000000000
+    Height = 9.000000000000000000
+    LineType = ltTop
+  end
+  object SpinBoxRed: TSpinBox
+    Position.Point = '(600,16)'
+    Width = 100.000000000000000000
+    Height = 22.000000000000000000
+    TabOrder = 28
+    BindingSource = TrackBarRed
+    ReadOnly = False
+    Max = 255.000000000000000000
+    Increment = 1.000000000000000000
+    ValueType = vtInteger
+  end
+  object SpinBoxGreen: TSpinBox
+    Position.Point = '(600,64)'
+    Width = 100.000000000000000000
+    Height = 22.000000000000000000
+    TabOrder = 29
+    BindingSource = TrackBarGreen
+    ReadOnly = False
+    Max = 255.000000000000000000
+    Increment = 1.000000000000000000
+    ValueType = vtInteger
+  end
+  object SpinBoxBlue: TSpinBox
+    Position.Point = '(600,112)'
+    Width = 100.000000000000000000
+    Height = 22.000000000000000000
+    TabOrder = 30
+    BindingSource = TrackBarBlue
+    ReadOnly = False
+    Max = 255.000000000000000000
+    Increment = 1.000000000000000000
+    ValueType = vtInteger
+  end
+end
