@@ -1,17 +1,15 @@
-program Demo;
+program Test;
 
 uses
   Vcl.Forms,
   uMain in 'uMain.pas' {FrmMain},
-  Vcl.Themes,
-  Vcl.Styles;
+  uXE2Patches in 'uXE2Patches.pas';
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  TStyleManager.TrySetStyle('Carbon');
   Application.CreateForm(TFrmMain, FrmMain);
   Application.Run;
 end.
