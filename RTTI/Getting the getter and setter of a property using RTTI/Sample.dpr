@@ -34,11 +34,18 @@ type
     function GetReadOnlyPropwGet: string;
     procedure SetWriteOnlyPropwSet(const Value: string);
     function GetReadBaseProp: string; override;
+    function GetArrayProp(Index: Integer): string;
+    procedure SetArrayProp(Index: Integer; const Value: string);
+    function GetInteger(const Index: Integer): Integer;
+    procedure SetInteger(const Index, Value: Integer);
   public
     property ReadOnlyProp: string read FReadOnlyProp;
     property WriteOnlyProp: string Write FWriteOnlyProp;
     property ReadOnlyPropwGet: string read GetReadOnlyPropwGet;
     property WriteOnlyPropwSet: string write SetWriteOnlyPropwSet;
+    property ArrayProp[Index: Integer]: string read GetArrayProp write SetArrayProp;  default;
+    property PropIndex1: Integer Index 1 read GetInteger write SetInteger;
+    property PropIndex2: Integer Index 2 read GetInteger write SetInteger;
   end;
 
   { TBar }
@@ -53,8 +60,18 @@ begin
 
 end;
 
-{ TFoo }
+//{ TFoo }
 
+
+function TFoo.GetArrayProp(Index: Integer): string;
+begin
+
+end;
+
+function TFoo.GetInteger(const Index: Integer): Integer;
+begin
+
+end;
 
 function TFoo.GetReadBaseProp: string;
 begin
@@ -67,6 +84,16 @@ begin
 end;
 
 
+
+procedure TFoo.SetArrayProp(Index: Integer; const Value: string);
+begin
+
+end;
+
+procedure TFoo.SetInteger(const Index, Value: Integer);
+begin
+
+end;
 
 procedure TFoo.SetWriteOnlyPropwSet(const Value: string);
 begin
@@ -89,6 +116,7 @@ begin
       //Get the pointer to the PPropInfo
       LPropInfo := TRttiInstanceProperty(LProp).PropInfo;
       Writeln(Format('%-18s GetProc %p SetProc %p', [LProp.Name, LPropInfo.GetProc, LPropInfo.SetProc]));
+      Writeln(LProp.Name);
     end;
 end;
 
