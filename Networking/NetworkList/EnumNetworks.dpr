@@ -116,13 +116,17 @@ end;
 
 begin
  try
-    CoInitialize(nil);
-    try
-      //GetNetworkInfo;
-      GetNetworks;
-    finally
-      CoUninitialize;
-    end;
+   if TOSVersion.Check(6) then
+   begin
+      CoInitialize(nil);
+      try
+        GetNetworks;
+      finally
+        CoUninitialize;
+      end;
+   end
+   else
+   Writeln('This windows version doesn''t support the Network List API');
  except
     on E:EOleException do
         Writeln(Format('EOleException %s %x', [E.Message,E.ErrorCode]));

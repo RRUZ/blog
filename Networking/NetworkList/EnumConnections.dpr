@@ -38,6 +38,8 @@ begin
     if NLM_CONNECTIVITY_IPV6_SUBNET  and Connectivity <> 0 then  Result := Result+  'Subnet ipv6, ';
     if NLM_CONNECTIVITY_IPV6_LOCALNETWORK  and Connectivity <> 0 then  Result := Result+ 'LocalNetwork ipv6, ';
     if NLM_CONNECTIVITY_IPV6_INTERNET  and Connectivity <> 0 then  Result := Result+'Internet ipv6, ';
+
+    Result:= StringReplace('['+Result+']', ', ]', ']', [rfReplaceAll]);
 end;
 
 
@@ -70,12 +72,17 @@ end;
 
 begin
  try
-    CoInitialize(nil);
-    try
-      GetConnections;
-    finally
-      CoUninitialize;
-    end;
+   if TOSVersion.Check(6) then
+   begin
+      CoInitialize(nil);
+      try
+        GetConnections;
+      finally
+        CoUninitialize;
+      end;
+   end
+   else
+   Writeln('This windows version doesn''t support the Network List API');
  except
     on E:EOleException do
         Writeln(Format('EOleException %s %x', [E.Message,E.ErrorCode]));

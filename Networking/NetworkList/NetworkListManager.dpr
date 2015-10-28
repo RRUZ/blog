@@ -56,7 +56,7 @@ begin
    Writeln('This windows version doesn''t support the Network List API');
  except
     on E:EOleException do
-        Writeln(Format('EOleException %s %x', [E.Message,E.ErrorCode]));
+        Writeln(Format('EOleException %s %x', [E.Message, E.ErrorCode]));
     on E:Exception do
         Writeln(E.Classname, ':', E.Message);
  end;
