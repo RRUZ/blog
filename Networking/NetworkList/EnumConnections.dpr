@@ -3,8 +3,6 @@ program EnumConnections;
 
 {$APPTYPE CONSOLE}
 
-{$R *.res}
-
 uses
   SysUtils,
   ActiveX,
@@ -14,7 +12,7 @@ uses
 
 
 //https://msdn.microsoft.com/en-us/library/windows/desktop/aa370796(v=vs.85).aspx
-function GetNetworkDomainType(DomainType : TOleEnum) : string;
+function GetNetworkDomainType(DomainType : NLM_DOMAIN_TYPE) : string;
 begin
  Result:='';
   case DomainType of
@@ -26,7 +24,7 @@ end;
 
 
 //https://msdn.microsoft.com/en-us/library/windows/desktop/aa370795(v=vs.85).aspx
-function GetNetworkConnectivity(Connectivity : TOleEnum) : string;
+function GetNetworkConnectivity(Connectivity : NLM_CONNECTIVITY) : string;
 begin
  Result:='';
     if NLM_CONNECTIVITY_DISCONNECTED and Connectivity <> 0 then  Result := Result+ 'Disconnected, ';
@@ -72,6 +70,7 @@ end;
 
 begin
  try
+   //Check is Windows Vista at least
    if TOSVersion.Check(6) then
    begin
       CoInitialize(nil);

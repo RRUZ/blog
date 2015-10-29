@@ -58,7 +58,7 @@ begin
 end;
 
 //https://msdn.microsoft.com/en-us/library/windows/desktop/aa370795(v=vs.85).aspx
-function GetNetworkConnectivity(Connectivity : TOleEnum) : string;
+function GetNetworkConnectivity(Connectivity : NLM_CONNECTIVITY) : string;
 begin
  Result:='';
     if NLM_CONNECTIVITY_DISCONNECTED and Connectivity <> 0 then  Result := Result+ 'Disconnected, ';
@@ -158,23 +158,27 @@ var
    NLMEvents : TNetworkEvents;
 begin
  try
+    //Check is Windows Vista at least
+   if TOSVersion.Check(6) then
+   begin
     NLMEvents:=TNetworkEvents.Create;
     try
       NLMEvents.Start;
       Writeln('Listening NLM events - press any key to stop');
-      //The next loop is only necessary in this sample console sample app
+      //The next loop is only necessary on this sample console App
       //In VCL forms Apps you don't need use a loop
       while not KeyPressed do
       begin
-          {$IF CompilerVersion > 18.5}
           Sleep(100);
           Application.ProcessMessages;
-          {$IFEND}
       end;
     finally
       NLMEvents.Stop;
       Writeln('NLM events - Done');
     end;
+   end
+   else
+   Writeln('This windows version doesn''t support the Network List API');
  except
     on E:EOleException do
         Writeln(Format('EOleException %s %x', [E.Message,E.ErrorCode]));

@@ -3,8 +3,6 @@ program EnumNetworks;
 
 {$APPTYPE CONSOLE}
 
-{$R *.res}
-
 uses
   SysUtils,
   ActiveX,
@@ -14,7 +12,7 @@ uses
 
 
 //https://msdn.microsoft.com/en-us/library/windows/desktop/aa370796(v=vs.85).aspx
-function GetNetworkDomainType(DomainType : TOleEnum) : string;
+function GetNetworkDomainType(DomainType : NLM_CONNECTIVITY) : string;
 begin
  Result:='';
   case DomainType of
@@ -24,9 +22,7 @@ begin
   end;
 end;
 
-
-
-function GetNetworkCategory(Category : TOleEnum) : string;
+function GetNetworkCategory(Category : NLM_NETWORK_CATEGORY) : string;
 begin
  Result:='';
   case Category of
@@ -35,7 +31,6 @@ begin
     NLM_NETWORK_CATEGORY_DOMAIN_AUTHENTICATED : Result := 'Authenticated';
   end;
 end;
-
 
 procedure GetNetworks;
 var
@@ -116,6 +111,7 @@ end;
 
 begin
  try
+   //Check is Windows Vista at least
    if TOSVersion.Check(6) then
    begin
       CoInitialize(nil);

@@ -3,8 +3,6 @@ program NetworkListManager;
 
 {$APPTYPE CONSOLE}
 
-{$R *.res}
-
 uses
   SysUtils,
   ActiveX,
@@ -14,7 +12,7 @@ uses
 
 
 //https://msdn.microsoft.com/en-us/library/windows/desktop/aa370795(v=vs.85).aspx
-function GetNetworkConnectivity(Connectivity : TOleEnum) : string;
+function GetNetworkConnectivity(Connectivity : NLM_CONNECTIVITY) : string;
 begin
  Result:='';
     if NLM_CONNECTIVITY_DISCONNECTED and Connectivity <> 0 then  Result := Result+ 'Disconnected, ';
@@ -43,7 +41,8 @@ end;
 
 begin
  try
-   if TOSVersion.Check(6) then
+  //Check is Windows Vista at least
+  if TOSVersion.Check(6) then
    begin
       CoInitialize(nil);
       try
