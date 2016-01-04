@@ -406,7 +406,7 @@ type
     uPhyId: ulong;
     dot11Bssid: Tndu_DOT11_MAC_ADDRESS;
     dot11BssType: Tndu_DOT11_BSS_TYPE;
-    //dot11BssPhyType: Tndu_DOT11_PHY_TYPE;
+    dot11BssPhyType: Tndu_DOT11_PHY_TYPE;
     lRssi: long;
     uLinkQuality: ulong;
     bInRegDomain: Boolean;

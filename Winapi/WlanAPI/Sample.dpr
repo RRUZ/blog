@@ -1,5 +1,6 @@
 {$APPTYPE CONSOLE}
 
+// JCL_DEBUG_EXPERT_DELETEMAPFILE OFF
 uses
   Windows,
   SysUtils,

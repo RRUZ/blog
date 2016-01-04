@@ -29,6 +29,8 @@ type
     dot11_phy_type_ofdm = 4,
     dot11_phy_type_hrdsss = 5,
     dot11_phy_type_erp = 6,
+    dot11_phy_type_ht = 7,
+    dot11_phy_type_vht = 8,
     dot11_phy_type_IHV_start = $80000000,
     dot11_phy_type_IHV_end = $ffffffff);
 
