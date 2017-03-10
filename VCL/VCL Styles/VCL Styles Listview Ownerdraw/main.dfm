@@ -1,0 +1,33 @@
+object FrmMain: TFrmMain
+  Left = 0
+  Top = 0
+  Caption = 'Test'
+  ClientHeight = 204
+  ClientWidth = 538
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 13
+  object LvSampleData: TListView
+    Left = 0
+    Top = 0
+    Width = 538
+    Height = 204
+    Align = alClient
+    Columns = <>
+    TabOrder = 0
+    OnDrawItem = LvSampleDataDrawItem
+    ExplicitLeft = 8
+    ExplicitTop = 32
+    ExplicitWidth = 250
+    ExplicitHeight = 150
+  end
+end
