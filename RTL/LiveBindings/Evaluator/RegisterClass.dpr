@@ -11,33 +11,33 @@ uses
   System.SysUtils;
 
 Type
- TMyClass= class
-  function Random(Value:Integer): Integer;
- end;
+  TMyClass = class
+    function Random(Value: Integer): Integer;
+  end;
 
-{ TMyClass }
-function TMyClass.Random(Value:Integer): Integer;
+  { TMyClass }
+function TMyClass.Random(Value: Integer): Integer;
 begin
-  Result:=System.Random(Value);
+  Result := System.Random(Value);
 end;
 
 procedure DoIt;
 Var
-  LScope : IScope;
-  LCompiledExpr : ICompiledBinding;
-  LResult : TValue;
+  LScope: IScope;
+  LCompiledExpr: ICompiledBinding;
+  LResult: TValue;
   LDictionaryScope: TDictionaryScope;
-  M : TMyClass;
+  M: TMyClass;
 begin
   M := TMyClass.Create;
   try
-    LScope:= TNestedScope.Create(BasicOperators, BasicConstants);
-    //add a object
+    LScope := TNestedScope.Create(BasicOperators, BasicConstants);
+    // add a object
     LDictionaryScope := TDictionaryScope.Create;
     LDictionaryScope.Map.Add('M', WrapObject(M));
     LScope := TNestedScope.Create(LScope, LDictionaryScope);
-    LCompiledExpr:= Compile('M.Random(10000000)', LScope);
-    LResult:=LCompiledExpr.Evaluate(LScope, nil, nil).GetValue;
+    LCompiledExpr := Compile('M.Random(10000000)', LScope);
+    LResult := LCompiledExpr.Evaluate(LScope, nil, nil).GetValue;
     if not LResult.IsEmpty then
       Writeln(LResult.ToString);
   finally
@@ -46,13 +46,14 @@ begin
 end;
 
 begin
- try
+  try
     Randomize;
     DoIt;
- except
-    on E:Exception do
-        Writeln(E.Classname, ':', E.Message);
- end;
- Writeln('Press Enter to exit');
- Readln;
+  except
+    on E: Exception do
+      Writeln(E.Classname, ':', E.Message);
+  end;
+  Writeln('Press Enter to exit');
+  Readln;
+
 end.

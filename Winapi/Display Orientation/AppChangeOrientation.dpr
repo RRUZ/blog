@@ -1,4 +1,4 @@
-//reference https://theroadtodelphi.wordpress.com/2011/02/11/changing-screen-orientation-programmatically-using-delphi/
+// reference https://theroadtodelphi.wordpress.com/2011/02/11/changing-screen-orientation-programmatically-using-delphi/
 program AppChangeOrientation;
 
 {$APPTYPE CONSOLE}
@@ -9,38 +9,38 @@ uses
 
 const
   DM_DISPLAYORIENTATION = $00800000;
-  ENUM_CURRENT_SETTINGS =-1;
-  DMDO_DEFAULT : DWORD  = 0;
-  DMDO_90      : DWORD  = 1;
-  DMDO_180     : DWORD  = 2;
-  DMDO_270     : DWORD  = 3;
+  ENUM_CURRENT_SETTINGS = -1;
+  DMDO_DEFAULT: DWORD = 0;
+  DMDO_90: DWORD = 1;
+  DMDO_180: DWORD = 2;
+  DMDO_270: DWORD = 3;
 
-procedure ChangeOrientation(NewOrientation:DWORD);
+procedure ChangeOrientation(NewOrientation: DWORD);
 var
-  dm      : TDeviceMode;
-  dwTemp  : DWORD;
-  dmDisplayOrientation : DWORD;
+  dm: TDeviceMode;
+  dwTemp: DWORD;
+  dmDisplayOrientation: DWORD;
 begin
-   ZeroMemory(@dm, sizeof(dm));
-   dm.dmSize   := sizeof(dm);
-   if EnumDisplaySettings(nil, DWORD(ENUM_CURRENT_SETTINGS), dm) then
-   begin
-      Move(dm.dmScale,dmDisplayOrientation,SizeOf(dmDisplayOrientation));
-      // swap width and height
-      if Odd(dmDisplayOrientation)<>Odd(NewOrientation) then
-      begin
-       dwTemp := dm.dmPelsHeight;
-       dm.dmPelsHeight:= dm.dmPelsWidth;
-       dm.dmPelsWidth := dwTemp;
-      end;
+  ZeroMemory(@dm, sizeof(dm));
+  dm.dmSize := sizeof(dm);
+  if EnumDisplaySettings(nil, DWORD(ENUM_CURRENT_SETTINGS), dm) then
+  begin
+    Move(dm.dmScale, dmDisplayOrientation, sizeof(dmDisplayOrientation));
+    // swap width and height
+    if Odd(dmDisplayOrientation) <> Odd(NewOrientation) then
+    begin
+      dwTemp := dm.dmPelsHeight;
+      dm.dmPelsHeight := dm.dmPelsWidth;
+      dm.dmPelsWidth := dwTemp;
+    end;
 
-      if dmDisplayOrientation<>NewOrientation then
-      begin
-        Move(NewOrientation,dm.dmScale,SizeOf(NewOrientation));
-        if (ChangeDisplaySettings(dm, 0)<>DISP_CHANGE_SUCCESSFUL) then
-         RaiseLastOSError;
-      end;
-   end;
+    if dmDisplayOrientation <> NewOrientation then
+    begin
+      Move(NewOrientation, dm.dmScale, sizeof(NewOrientation));
+      if (ChangeDisplaySettings(dm, 0) <> DISP_CHANGE_SUCCESSFUL) then
+        RaiseLastOSError;
+    end;
+  end;
 end;
 
 begin
@@ -64,5 +64,6 @@ begin
     on E: Exception do
       Writeln(E.ClassName, ': ', E.Message);
   end;
-     readln;
+  Readln;
+
 end.

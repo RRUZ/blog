@@ -1,4 +1,3 @@
-
 program Sample;
 
 {$APPTYPE CONSOLE}
@@ -12,8 +11,8 @@ uses
   uRttiHelper in 'uRttiHelper.pas';
 
 type
-  //The getters and setters methods of the property must emit RTTI info this implies which depending of the visibility of these methods
-  //you will need to instruct to the compiler generate RTTI info adding this sentence to your class
+  // The getters and setters methods of the property must emit RTTI info this implies which depending of the visibility of these methods
+  // you will need to instruct to the compiler generate RTTI info adding this sentence to your class {$RTTI EXPLICIT METHODS([vcPrivate])}
   {$RTTI EXPLICIT METHODS([vcPrivate])}
   TBar = class
   private
@@ -26,9 +25,10 @@ type
     property WriteBaseProp: string write SetWriteBaseProp;
   end;
 
-  //The getters and setters methods of the property must emit RTTI info this implies which depending of the visibility of these methods
-  //you will need to instruct to the compiler generate RTTI info adding this sentence to your class
+  // The getters and setters methods of the property must emit RTTI info this implies which depending of the visibility of these methods
+  // you will need to instruct to the compiler generate RTTI info adding this sentence to your class {$RTTI EXPLICIT METHODS([vcPrivate])}
   {$RTTI EXPLICIT METHODS([vcPrivate])}
+
   TFoo = class(TBar)
   private
     function GetReadOnlyPropwGet: string;
@@ -43,7 +43,7 @@ type
     property WriteOnlyProp: string Write FWriteOnlyProp;
     property ReadOnlyPropwGet: string read GetReadOnlyPropwGet;
     property WriteOnlyPropwSet: string write SetWriteOnlyPropwSet;
-    property ArrayProp[Index: Integer]: string read GetArrayProp write SetArrayProp;  default;
+    property ArrayProp[Index: Integer]: string read GetArrayProp write SetArrayProp; default;
     property PropIndex1: Integer Index 1 read GetInteger write SetInteger;
     property PropIndex2: Integer Index 2 read GetInteger write SetInteger;
   end;
@@ -60,8 +60,7 @@ begin
 
 end;
 
-//{ TFoo }
-
+// { TFoo }
 
 function TFoo.GetArrayProp(Index: Integer): string;
 begin
@@ -82,8 +81,6 @@ function TFoo.GetReadOnlyPropwGet: string;
 begin
 
 end;
-
-
 
 procedure TFoo.SetArrayProp(Index: Integer; const Value: string);
 begin
@@ -107,21 +104,21 @@ var
   LProp: TRttiProperty;
   LPropInfo: PPropInfo;
 begin
-  //Get the typeinfo of the class
+  // Get the typeinfo of the class
   LType := LContext.GetType(AClass.ClassInfo);
 
   for LProp in LType.GetProperties() do
     if LProp is TRttiInstanceProperty then
     begin
-      //Get the pointer to the PPropInfo
+      // Get the pointer to the PPropInfo
       LPropInfo := TRttiInstanceProperty(LProp).PropInfo;
-      Writeln(Format('%-18s GetProc %p SetProc %p', [LProp.Name, LPropInfo.GetProc, LPropInfo.SetProc]));
+      Writeln(Format('%-18s GetProc %p SetProc %p',
+        [LProp.Name, LPropInfo.GetProc, LPropInfo.SetProc]));
       Writeln(LProp.Name);
     end;
 end;
 
-
-//This method uses the TRttiProperty Helper  to resolve the names of the getters and setters
+// This method uses the TRttiProperty Helper  to resolve the names of the getters and setters
 procedure DumpPropInfoExt(AClass: TObject);
 var
   LContext: TRttiContext;
@@ -137,7 +134,8 @@ begin
     if LProp is TRttiInstanceProperty then
     begin
       LPropInfo := TRttiInstanceProperty(LProp).PropInfo;
-      Writeln(Format('%-18s GetProc %p SetProc %p', [LProp.Name, LPropInfo.GetProc, LPropInfo.SetProc]));
+      Writeln(Format('%-18s GetProc %p SetProc %p',
+        [LProp.Name, LPropInfo.GetProc, LPropInfo.SetProc]));
 
       if LProp.IsReadable then
       begin
