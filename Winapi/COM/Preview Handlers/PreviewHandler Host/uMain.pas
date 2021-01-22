@@ -19,7 +19,7 @@ type
   private
     { Private declarations }
     FPreview: THostPreviewHandler;
-    procedure LoadPreview(const FileName : string);
+    procedure LoadPreview(const FileName: string);
   public
     { Public declarations }
   end;
@@ -58,7 +58,7 @@ begin
   FPreview.Width := Panel1.ClientWidth;
   FPreview.Height := Panel1.ClientHeight;
   FPreview.Parent := Panel1;
-  FPreview.Align  := alClient;
+  FPreview.Align := alClient;
   //FPreview.FileName:='C:\Users\Dexter\Desktop\RAD Studio Projects\XE2\delphi-preview-handler\main.pas';
   //FPreview.FileName:='C:\Users\Dexter\Desktop\RAD Studio Projects\2010\SMBIOS Delphi\Docs\DSP0119.pdf';
   //FPreview.FileName:='C:\Users\Dexter\Desktop\seleccion\RePLE.msg';

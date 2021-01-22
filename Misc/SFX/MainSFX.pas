@@ -45,8 +45,8 @@ end;
 function SelectFolder(hwndOwner: HWND;const Caption: string; var InitFolder: string): Boolean;
 var
   ItemIDList: PItemIDList;
-  idlRoot   : PItemIDList;
-  Path      : PAnsiChar;
+  idlRoot: PItemIDList;
+  Path: PAnsiChar;
   BrowseInfo: TBrowseInfo;
 begin
   Result := False;
@@ -55,13 +55,13 @@ begin
   with BrowseInfo do
   begin
     hwndOwner := GetActiveWindow;
-    pidlRoot  := idlRoot;
+    pidlRoot := idlRoot;
     SHGetSpecialFolderLocation(hwndOwner, CSIDL_DRIVES, idlRoot);
     pszDisplayName := StrAlloc(MAX_PATH);
     lpszTitle := PAnsiChar(Caption);
-    lpfn      := @SelectFolderCallbackProc;
-    lParam    := LongInt(PAnsiChar(InitFolder));
-    ulFlags   := BIF_RETURNONLYFSDIRS OR BIF_USENEWUI;
+    lpfn := @SelectFolderCallbackProc;
+    lParam := LongInt(PAnsiChar(InitFolder));
+    ulFlags := BIF_RETURNONLYFSDIRS OR BIF_USENEWUI;
   end;
 
   ItemIDList := SHBrowseForFolder(BrowseInfo);
@@ -69,18 +69,18 @@ begin
     if SHGetPathFromIDList(ItemIDList, Path) then
     begin
       InitFolder := Path;
-      Result    := True;
+      Result := True;
     end;
 end;
 
 
 procedure TFrmMain.Extract;
 var
-  DeCompressStream : TDeCompressionStream;
-  ResourceStream   : TResourceStream;
-  DestFileStream   : TFileStream;
-  FileNameDest     : String;
-  RecSFX           : TRecSFX;
+  DeCompressStream: TDeCompressionStream;
+  ResourceStream: TResourceStream;
+  DestFileStream: TFileStream;
+  FileNameDest: String;
+  RecSFX: TRecSFX;
 begin
 
   if FindResource(0, 'SFXDATA', RT_RCDATA)=0 then
@@ -108,7 +108,7 @@ begin
     ResourceStream:= TResourceStream.Create(0,'SFXDATA',RT_RCDATA);
     try
       ProgressBarSfx.Max:=ResourceStream.Size;
-      FileNameDest   := EditPath.Text+ChangeFileExt(ExtractFileName(ParamStr(0)),'');
+      FileNameDest := EditPath.Text+ChangeFileExt(ExtractFileName(ParamStr(0)),'');
       DestFileStream := TFileStream.Create(FileNameDest,fmCreate);
       try
         DeCompressStream:=TDeCompressionStream.Create(ResourceStream);
@@ -124,7 +124,7 @@ begin
     finally
       ResourceStream.Free;
     end;
- except on e : exception do
+ except on e: exception do
    Application.MessageBox(PAnsiChar(e.Message),'Error',MB_OK+MB_ICONERROR);
  end;
 end;

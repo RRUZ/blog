@@ -37,7 +37,7 @@ end;
 
 procedure TFrmMainTrace.TraceAddress;
 var
-  Trace : TGeoTraceThread;
+  Trace: TGeoTraceThread;
 begin
     if Trim(EditAddress.Text)='' then  Exit;
     Trace:=TGeoTraceThread.Create(True);

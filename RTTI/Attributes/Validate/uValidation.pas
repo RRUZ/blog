@@ -14,18 +14,18 @@ type
   private
     function GetCustomMessage: string;  virtual;
   public
-    function  Validate (AValue: TValue) : Boolean; virtual;
-    property  CustomMessage : string read GetCustomMessage;
+    function  Validate (AValue: TValue): Boolean; virtual;
+    property  CustomMessage: string read GetCustomMessage;
   end;
 
   ValidTypesAttribute =  class (ValidationAttribute)
   private
-    FCustomMessage : string;
-    FtypeKinds : TTypeKinds;
+    FCustomMessage: string;
+    FtypeKinds: TTypeKinds;
     function GetCustomMessage: string;  override;
   public
-    constructor Create(const TypeKinds : TTypeKinds); overload;
-    function  Validate (AValue: TValue) : Boolean; override;
+    constructor Create(const TypeKinds: TTypeKinds); overload;
+    function  Validate (AValue: TValue): Boolean; override;
   end;
 
   [ValidTypes([tkString, tkUString, tkUnicodeString, tkLString])]
@@ -33,7 +33,7 @@ type
   private
     function GetCustomMessage: string;  override;
   public
-    function  Validate (AValue: TValue) : Boolean; override;
+    function  Validate (AValue: TValue): Boolean; override;
   end;
 
   [ValidTypes([tkString, tkUString, tkUnicodeString, tkLString])]
@@ -41,33 +41,33 @@ type
   private
     function GetCustomMessage: string;  override;
   public
-    function  Validate (AValue: TValue) : Boolean; override;
+    function  Validate (AValue: TValue): Boolean; override;
   end;
 
   [ValidTypes([tkInteger])]
   RangeAttribute =  class (ValidationAttribute)
   private
-     FMin, FMax : Integer;
+     FMin, FMax: Integer;
     function GetCustomMessage: string;  override;
   public
-    function  Validate (AValue: TValue) : Boolean; override;
-    constructor  Create(AMin : Integer = 0; AMax : Integer =0); overload;
+    function  Validate (AValue: TValue): Boolean; override;
+    constructor  Create(AMin: Integer = 0; AMax: Integer =0); overload;
   end;
 
   TAttributeTransDirection = (tdForward, tdBackward);
 
   TransformAttribute = class (TCustomAttribute)
   public
-    function RunTransform(AValue : TValue; out OutValue : TValue; ADirection : TAttributeTransDirection) : Boolean; virtual;
+    function RunTransform(AValue: TValue; out OutValue: TValue; ADirection: TAttributeTransDirection): Boolean; virtual;
   end;
 
   EncryptedAttribute = class (TransformAttribute)
   public
-    function RunTransform(AValue : TValue; out OutValue : TValue; ADirection : TAttributeTransDirection) : Boolean; override;
+    function RunTransform(AValue: TValue; out OutValue: TValue; ADirection: TAttributeTransDirection): Boolean; override;
   end;
 
-   function TryValidateObject(AClass : TObject; ValidationResult : TStrings = nil) : boolean;
-   function TryTransformObject(AClass : TObject; ADirection : TAttributeTransDirection) : boolean;
+   function TryValidateObject(AClass: TObject; ValidationResult: TStrings = nil): boolean;
+   function TryTransformObject(AClass: TObject; ADirection: TAttributeTransDirection): boolean;
 
 implementation
 
@@ -76,14 +76,14 @@ uses
   IdCoderMIME,
   System.RegularExpressions;
 
-function TryValidateObject(AClass : TObject; ValidationResult : TStrings = nil): boolean;
+function TryValidateObject(AClass: TObject; ValidationResult: TStrings = nil): boolean;
 var
- LContext : TRttiContext;
- LType, LTypeAttribute : TRttiType;
- LAttr, LInnerAttribute : TCustomAttribute;
- LProp : TRttiProperty;
- sMessage : string;
- InnerValPassed : Boolean;
+ LContext: TRttiContext;
+ LType, LTypeAttribute: TRttiType;
+ LAttr, LInnerAttribute: TCustomAttribute;
+ LProp: TRttiProperty;
+ sMessage: string;
+ InnerValPassed: Boolean;
 begin
   result := true;
   //InnerValPassed:=True;
@@ -106,7 +106,7 @@ begin
                if not ValidationAttribute(LInnerAttribute).Validate(LProp.GetValue(AClass))  then
                  begin
                   result:=false;
-                  sMessage :=  Format('Failed validation %s on attribute %s property %s.%s (Hint : %s)',
+                  sMessage :=  Format('Failed validation %s on attribute %s property %s.%s (Hint: %s)',
                   [LInnerAttribute.ClassName, LAttr.ClassName, AClass.ClassName, LProp.Name, ValidationAttribute(LInnerAttribute).CustomMessage]) + sLineBreak;
 
                   if (ValidationResult<>nil) then
@@ -124,7 +124,7 @@ begin
            if not ValidationAttribute(LAttr).Validate(LProp.GetValue(AClass)) then
            begin
             Result:=false;
-            sMessage := Format('Failed validation %s on property %s.%s (Hint : %s)', [LAttr.ClassName, AClass.ClassName, LProp.Name, ValidationAttribute(LAttr).CustomMessage]);
+            sMessage := Format('Failed validation %s on property %s.%s (Hint: %s)', [LAttr.ClassName, AClass.ClassName, LProp.Name, ValidationAttribute(LAttr).CustomMessage]);
             //store the message in the stringlist
             if ValidationResult<>nil then
               ValidationResult.Add(sMessage);
@@ -135,13 +135,13 @@ begin
     end;
 end;
 
-function TryTransformObject(AClass : TObject; ADirection : TAttributeTransDirection) : boolean;
+function TryTransformObject(AClass: TObject; ADirection: TAttributeTransDirection): boolean;
 var
-  LContext : TRttiContext;
-  LType : TRttiType;
-  LAttr : TCustomAttribute;
-  LProp : TRttiProperty;
-  OValue : TValue;
+  LContext: TRttiContext;
+  LType: TRttiType;
+  LAttr: TCustomAttribute;
+  LProp: TRttiProperty;
+  OValue: TValue;
 begin
   Result:=True;
   LType:=LContext.GetType(AClass.ClassInfo);
@@ -249,7 +249,7 @@ end;
 
 function ValidTypesAttribute.GetCustomMessage: string;
 var
- LKind : TTypeKind;
+ LKind: TTypeKind;
 begin
   Result:='';
   if FtypeKinds<>[] then
@@ -288,10 +288,10 @@ end;
 function EncryptedAttribute.RunTransform(AValue: TValue; out OutValue: TValue;
   ADirection: TAttributeTransDirection): Boolean;
 var
- Cypher : TPC1Cypher;
- I : Integer;
- Data :  TArray<Byte>;
- LStream : TMemoryStream;
+ Cypher: TPC1Cypher;
+ I: Integer;
+ Data:  TArray<Byte>;
+ LStream: TMemoryStream;
 begin
   //encrypt
   if ADirection= tdForward then

@@ -35,22 +35,22 @@ type
     procedure EditUserExit(Sender: TObject);
     procedure EditPasswordExit(Sender: TObject);
   private
-    Dt            : OleVariant;
-    FSWbemLocator : OLEVariant;
-    FWMIService   : OLEVariant;
-    FExtensions   : TStringList;
+    Dt: OleVariant;
+    FSWbemLocator: OLEVariant;
+    FWMIService: OLEVariant;
+    FExtensions: TStringList;
     FComputer: string;
     FUser: string;
     FPassword: string;
-    function ConnectWMI : boolean;
+    function ConnectWMI: boolean;
     procedure UpdateFolderTreeItem(Node:TTreeNode);
     procedure UpdateFileTreeItem(Node:TTreeNode);
-    function VarDateToDateTime(const V : OleVariant): TDateTime;
-    function GetNodeFullPath(Node:TTreeNode) : string;
-    function GetImageIndexExt(const Ext : string) : Integer;
-    property Computer :  string read FComputer;
-    property User : string read FUser;
-    property Password : string read FPassword;
+    function VarDateToDateTime(const V: OleVariant): TDateTime;
+    function GetNodeFullPath(Node:TTreeNode): string;
+    function GetImageIndexExt(const Ext: string): Integer;
+    property Computer:  string read FComputer;
+    property User: string read FUser;
+    property Password: string read FPassword;
   public
     { Public declarations }
   end;
@@ -122,11 +122,11 @@ begin
   end;
 end;
 
-function TFrmMain.ConnectWMI : Boolean;
+function TFrmMain.ConnectWMI: Boolean;
 begin
  Result:=False;
  try
-    FWMIService   := FSWbemLocator.ConnectServer(Computer, 'root\CIMV2', User, Password);
+    FWMIService := FSWbemLocator.ConnectServer(Computer, 'root\CIMV2', User, Password);
     Result:=True;
  except
     on E:EOleException do
@@ -169,8 +169,8 @@ end;
 
 function TFrmMain.GetImageIndexExt(const Ext: string): Integer;
 var
-  Icon : TIcon;
-  FileInfo : SHFILEINFO;
+  Icon: TIcon;
+  FileInfo: SHFILEINFO;
 begin
   ZeroMemory(@FileInfo, SizeOf(FileInfo));
   Result:=FExtensions.IndexOf(Ext);
@@ -211,22 +211,22 @@ begin
       UpdateFileTreeItem(Node);
   except
     on E: Exception do
-     ShowMessage(Format('Message : %s : Trace %s',[E.Message, E.StackTrace]));
+     ShowMessage(Format('Message: %s: Trace %s',[E.Message, E.StackTrace]));
   end;
 end;
 
 procedure TFrmMain.UpdateFileTreeItem(Node: TTreeNode);
 Var
   FWbemObjectSet: OLEVariant;
-  FWbemObject   : OLEVariant;
-  oEnum         : IEnumvariant;
-  iValue        : LongWord;
-  sValue        : String;
-  Path          : String;
-  Drive         : String;
-  WmiPath       : String;
-  Item          : TListItem;
-  Wql           : String;
+  FWbemObject: OLEVariant;
+  oEnum: IEnumvariant;
+  iValue: LongWord;
+  sValue: String;
+  Path: String;
+  Drive: String;
+  WmiPath: String;
+  Item: TListItem;
+  Wql: String;
 begin
   Path    :=GetNodeFullPath(Node);
   Drive   :=ExtractFileDrive(Path);
@@ -240,7 +240,7 @@ begin
     Wql:=Format('SELECT Name,FileSize,CreationDate,FileType FROM CIM_DataFile Where Drive="%s" AND Path="%s"',[Drive,WmiPath]);
     MemoLog.Lines.Add(Wql);
     FWbemObjectSet:= FWMIService.ExecQuery(Wql,'WQL',wbemFlagForwardOnly);
-    oEnum         := IUnknown(FWbemObjectSet._NewEnum) as IEnumVariant;
+    oEnum := IUnknown(FWbemObjectSet._NewEnum) as IEnumVariant;
     while oEnum.Next(1, FWbemObject, iValue) = 0 do
     begin
       sValue:=FWbemObject.Name;
@@ -261,17 +261,17 @@ end;
 
 procedure TFrmMain.UpdateFolderTreeItem(Node: TTreeNode);
 Var
-  lNode         : TTreeNode;
+  lNode: TTreeNode;
   FWbemObjectSet: OLEVariant;
-  FWbemObject   : OLEVariant;
-  oEnum         : IEnumvariant;
-  iValue        : LongWord;
+  FWbemObject: OLEVariant;
+  oEnum: IEnumvariant;
+  iValue: LongWord;
 
-  sValue        : string;
-  Path          : string;
-  Drive         : string;
-  WmiPath       : string;
-  Wql           : string;
+  sValue: string;
+  Path: string;
+  Drive: string;
+  WmiPath: string;
+  Wql: string;
 begin
   if Node=nil then
   begin
@@ -279,7 +279,7 @@ begin
     TreeViewFolders.Items.Clear;
     try
       FWbemObjectSet:= FWMIService.ExecQuery('SELECT Name FROM Win32_LogicalDisk','WQL',wbemFlagForwardOnly);
-      oEnum         := IUnknown(FWbemObjectSet._NewEnum) as IEnumVariant;
+      oEnum := IUnknown(FWbemObjectSet._NewEnum) as IEnumVariant;
       while oEnum.Next(1, FWbemObject, iValue) = 0 do
       begin
         sValue:=Trim(FWbemObject.Name);
@@ -305,7 +305,7 @@ begin
       Wql     :=Format('SELECT Name FROM CIM_Directory Where Drive="%s" AND Path="%s"',[Drive,WmiPath]);
       MemoLog.Lines.Add(Wql);
       FWbemObjectSet:= FWMIService.ExecQuery(Wql,'WQL',wbemFlagForwardOnly);
-      oEnum         := IUnknown(FWbemObjectSet._NewEnum) as IEnumVariant;
+      oEnum := IUnknown(FWbemObjectSet._NewEnum) as IEnumVariant;
       while oEnum.Next(1, FWbemObject, iValue) = 0 do
       begin
         sValue:=Trim(FWbemObject.Name);

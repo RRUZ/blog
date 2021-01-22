@@ -273,7 +273,7 @@ HTMLStr: String =
 
 procedure TfrmMain.FormCreate(Sender: TObject);
 var
-  aStream     : TMemoryStream;
+  aStream: TMemoryStream;
 begin
    WebBrowser1.Navigate('about:blank');
     if Assigned(WebBrowser1.Document) then
@@ -298,7 +298,7 @@ end;
 
 procedure TfrmMain.ButtonGotoAddressClick(Sender: TObject);
 var
-   address    : string;
+   address: string;
 begin
    address := MemoAddress.Lines.Text;
    address := StringReplace(StringReplace(Trim(address), #13, ' ', [rfReplaceAll]), #10, ' ', [rfReplaceAll]);

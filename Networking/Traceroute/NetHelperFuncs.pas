@@ -12,17 +12,17 @@ uses
 
 type
  TGeoInfo   = record
-  Status        : string;
-  CountryCode   : string;
-  CountryName   : string;
-  RegionCode    : string;
-  City          : string;
-  ZipPostalCode : string;
-  Latitude      : double;
-  Longitude     : double;
-  TimezoneName  : string;
-  Gmtoffset     : string;
-  Isdst         : string;
+  Status: string;
+  CountryCode: string;
+  CountryName: string;
+  RegionCode: string;
+  City: string;
+  ZipPostalCode: string;
+  Latitude: double;
+  Longitude: double;
+  TimezoneName: string;
+  Gmtoffset: string;
+  Isdst: string;
   function LatitudeToString:string;
   function LongitudeToString:string;
  end;
@@ -31,39 +31,39 @@ type
   ProcTraceLogCallBack = procedure(const Msg:string) of object;
   TGeoTraceThread = class(TThread)
   private
-    DestAddr            : in_addr;
-    TraceHandle         : THandle;
-    FDestAddress        : string;
-    FLogString          : string;
-    FIcmpTimeOut        : Word;
-    FMaxHops            : Word;
-    FResolveHostName    : boolean;
-    FServerCallBack     : string;
-    FServerIpCallBack   : string;
-    FCallBack           : ProcTraceCallBack;
-    FLogCallBack        : ProcTraceLogCallBack;
-    FIncludeGeoInfo     : boolean;
-    FGeoInfo            : TGeoInfo;
+    DestAddr: in_addr;
+    TraceHandle: THandle;
+    FDestAddress: string;
+    FLogString: string;
+    FIcmpTimeOut: Word;
+    FMaxHops: Word;
+    FResolveHostName: boolean;
+    FServerCallBack: string;
+    FServerIpCallBack: string;
+    FCallBack: ProcTraceCallBack;
+    FLogCallBack: ProcTraceLogCallBack;
+    FIncludeGeoInfo: boolean;
+    FGeoInfo: TGeoInfo;
     function  Trace(const Ttl: Byte): Longint;
     procedure Log;
     procedure IntCallBack;
   public
     procedure Execute; override;
-    property  MaxHops : Word read FMaxHops write FMaxHops default 30;
-    property  DestAddress : string read FDestAddress write FDestAddress;
-    property  IcmpTimeOut : Word read FIcmpTimeOut write FIcmpTimeOut default 5000;
-    property  ResolveHostName : boolean read FResolveHostName write FResolveHostName default True;
-    property  IncludeGeoInfo : boolean read FIncludeGeoInfo write FIncludeGeoInfo default True;
-    property  CallBack : ProcTraceCallBack read FCallBack write FCallBack;
-    property  MsgCallBack : ProcTraceLogCallBack read FLogCallBack write FLogCallBack;
+    property  MaxHops: Word read FMaxHops write FMaxHops default 30;
+    property  DestAddress: string read FDestAddress write FDestAddress;
+    property  IcmpTimeOut: Word read FIcmpTimeOut write FIcmpTimeOut default 5000;
+    property  ResolveHostName: boolean read FResolveHostName write FResolveHostName default True;
+    property  IncludeGeoInfo: boolean read FIncludeGeoInfo write FIncludeGeoInfo default True;
+    property  CallBack: ProcTraceCallBack read FCallBack write FCallBack;
+    property  MsgCallBack: ProcTraceLogCallBack read FLogCallBack write FLogCallBack;
   end;
 
 
-function  GetLocalComputerName : String;
+function  GetLocalComputerName: String;
 function  GetRemoteHostName(Addr:DWORD): string;   overload;
 function  GetRemoteHostName(const Addr: string): string; overload;
 function  GetExternalIP: string;
-procedure GetGeoInfo(const IpAddress : string;var GeoInfo :TGeoInfo);
+procedure GetGeoInfo(const IpAddress: string;var GeoInfo :TGeoInfo);
 
 implementation
 
@@ -83,9 +83,9 @@ type
 
   PIP_option_information = ^TIPOptionInformation;
   TIPOptionInformation   = packed record
-    Ttl        : Byte;
-    Tos        : Byte;
-    Flags      : Byte;
+    Ttl: Byte;
+    Tos: Byte;
+    Flags: Byte;
     OptionsSize: Byte;
     OptionsData: Pointer;
   end;
@@ -93,18 +93,18 @@ type
 
   PIcmpEchoReply= ^TIcmpEchoReply;
   TIcmpEchoReply = packed record
-    Address        : Longint;
-    Status         : Longint;
-    RoundTripTime  : Longint;
-    DataSize       : Word;
-    Reserved       : Word;
-    Data           : Pointer;
-    Options        : TIPOptionInformation;
+    Address: Longint;
+    Status: Longint;
+    RoundTripTime: Longint;
+    DataSize: Word;
+    Reserved: Word;
+    Data: Pointer;
+    Options: TIPOptionInformation;
   end;
 
 function IcmpCreateFile: THandle; stdcall; external 'ICMP.DLL' name 'IcmpCreateFile';
 function IcmpCloseHandle(IcmpHandle: THandle): BOOL; stdcall;  external 'ICMP.DLL' name 'IcmpCloseHandle';
-function IcmpSendEcho(IcmpHandle : THandle; DestinationAddress: Longint;  RequestData: Pointer; RequestSize: Word; RequestOptions: PIP_option_information; ReplyBuffer: Pointer; ReplySize, Timeout: DWORD): DWORD; stdcall;  external 'ICMP.DLL' name 'IcmpSendEcho';
+function IcmpSendEcho(IcmpHandle: THandle; DestinationAddress: Longint;  RequestData: Pointer; RequestSize: Word; RequestOptions: PIP_option_information; ReplyBuffer: Pointer; ReplySize, Timeout: DWORD): DWORD; stdcall;  external 'ICMP.DLL' name 'IcmpSendEcho';
 
 
 { TGeoInfo }
@@ -125,17 +125,17 @@ begin
   result:=FloatToStr(Longitude,FormatSettings);
 end;
 
-procedure GetGeoInfo(const IpAddress : string;var GeoInfo :TGeoInfo);
+procedure GetGeoInfo(const IpAddress: string;var GeoInfo :TGeoInfo);
 var
-  lHTTP         : TIdHTTP;
-  lStream       : TStringStream;
-  XMLDoc        : OleVariant;
-  ANode         : OleVariant;
+  lHTTP: TIdHTTP;
+  lStream: TStringStream;
+  XMLDoc: OleVariant;
+  ANode: OleVariant;
   FormatSettings: TFormatSettings;
-  d             : Double;
-  Success       : HResult;
+  d: Double;
+  Success: HResult;
 begin
-  lHTTP   := TIdHTTP.Create(nil);
+  lHTTP := TIdHTTP.Create(nil);
   lStream := TStringStream.Create('');
   Success := CoInitializeEx(nil, COINIT_MULTITHREADED);
   try
@@ -190,10 +190,10 @@ begin
   end;
 end;
 
-function GetLocalComputerName : String;
+function GetLocalComputerName: String;
 var
   Buffer: array[0..255] of Char;
-  Size  : DWORD;
+  Size: DWORD;
 begin
   size := 256;
   if GetComputerName(Buffer, Size) then
@@ -221,10 +221,10 @@ end;
 
 function GetExternalIP: string;
 var
-  lHTTP  : TIdHTTP;
+  lHTTP: TIdHTTP;
   lStream: TStringStream;
 begin
-  lHTTP   := TIdHTTP.Create(nil);
+  lHTTP := TIdHTTP.Create(nil);
   lStream := TStringStream.Create(Result);
   try
     try
@@ -247,20 +247,20 @@ procedure TGeoTraceThread.Execute;
 const
   MaxPings = 3;
 var
-  HostName   : String;
-  HostReply  : Boolean;
-  HostIP     : LongInt;
-  HostEnt    : PHostEnt;
-  WSAData    : TWSAData;
-  WsaErr     : DWORD;
-  OldTick    : DWORD;
-  PingTime   : DWORD;
-  TraceResp  : Longint;
-  Index      : Word;
+  HostName: String;
+  HostReply: Boolean;
+  HostIP: LongInt;
+  HostEnt: PHostEnt;
+  WSAData: TWSAData;
+  WsaErr: DWORD;
+  OldTick: DWORD;
+  PingTime: DWORD;
+  TraceResp: Longint;
+  Index: Word;
   FCurrentTTL: Word;
-  sValue     : string;
+  sValue: string;
   FGeoInfoStr: string;
-  IpAddress  : in_addr;
+  IpAddress: in_addr;
 begin
 
   WsaErr := WSAStartup($101, WSAData);
@@ -280,7 +280,7 @@ begin
       Exit;
     end;
 
-    DestAddr    := PInAddr(in_addr(HostEnt.h_addr_list^))^;
+    DestAddr := PInAddr(in_addr(HostEnt.h_addr_list^))^;
     TraceHandle := IcmpCreateFile;
 
     if TraceHandle = INVALID_HANDLE_VALUE then
@@ -301,8 +301,8 @@ begin
         Synchronize(Log);
       end;
 
-      TraceResp    := 0;
-      FCurrentTTL  := 0;
+      TraceResp := 0;
+      FCurrentTTL := 0;
 
       while (TraceResp <> DestAddr.S_addr) and (FCurrentTTL < FMaxHops) do
       begin
@@ -311,7 +311,7 @@ begin
         sValue:='';
         for Index := 0 to MaxPings-1 do
         begin
-          OldTick   := GetTickCount;
+          OldTick := GetTickCount;
           TraceResp := Trace(FCurrentTTL);
 
           if TraceResp = -1 then
@@ -326,7 +326,7 @@ begin
              FLogString := Format('    <%d ms', [1]);
 
             HostReply := True;
-            HostIP    := TraceResp;
+            HostIP := TraceResp;
           end;
 
           if Index = 0 then
@@ -353,8 +353,8 @@ begin
           FServerIpCallBack:=sValue;
           if FResolveHostName then
           begin
-            HostName         := GetRemoteHostName(HostIP);
-            FServerCallBack  := HostName;
+            HostName := GetRemoteHostName(HostIP);
+            FServerCallBack := HostName;
             if HostName <> '' then
               FLogString := FLogString + HostName + ' [' + sValue + '] '+FGeoInfoStr
             else
@@ -390,14 +390,14 @@ end;
 function TGeoTraceThread.Trace(const Ttl: Byte): Longint;
 var
   IPOptionInfo: TIPOptionInformation;
-  IcmpEcho    : PIcmpEchoReply;
-  IcpmErr     : Integer;
+  IcmpEcho: PIcmpEchoReply;
+  IcpmErr: Integer;
 begin
   GetMem(IcmpEcho, SizeOf(TIcmpEchoReply));
   try
-    IPOptionInfo.Ttl         := Ttl;
-    IPOptionInfo.Tos         := 0;
-    IPOptionInfo.Flags       := 0;
+    IPOptionInfo.Ttl := Ttl;
+    IPOptionInfo.Tos := 0;
+    IPOptionInfo.Flags := 0;
     IPOptionInfo.OptionsSize := 0;
     IPOptionInfo.OptionsData := nil;
 

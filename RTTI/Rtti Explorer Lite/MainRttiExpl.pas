@@ -38,7 +38,7 @@ type
     procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
-    ctx      : TRttiContext;
+    ctx: TRttiContext;
     procedure LoadTree;
     procedure LoadClasses;
     function  FindTextTv(Text:string;Tv:TTreeView):TTreeNode;
@@ -65,7 +65,7 @@ Field_Level   =3;
 
 procedure ShowRttiLiteExplorer;
 var
- Frm :  TFrmRTTIExplLite;
+ Frm:  TFrmRTTIExplLite;
 begin
   Frm:= TFrmRTTIExplLite.Create(nil);
   try
@@ -132,7 +132,7 @@ end;
 
 procedure TFrmRTTIExplLite.BtnSearchClick(Sender: TObject);
 Var
- Node  : TTreeNode;
+ Node: TTreeNode;
 begin
   if Trim(EditSearch.Text)='' then exit;
 
@@ -164,7 +164,7 @@ end;
 
 function TFrmRTTIExplLite.FindTextTv(Text: string;Tv:TTreeView): TTreeNode;
 var
-  Node     : TTreeNode;
+  Node: TTreeNode;
 begin
  Result:=nil;
  Tv.Items.BeginUpdate;
@@ -209,8 +209,8 @@ procedure TFrmRTTIExplLite.LoadClasses;
 
         function FindTRttiType(lType:TRttiType):TTreeNode;
         var
-          i        : integer;
-          Node     : TTreeNode;
+          i: integer;
+          Node: TTreeNode;
         begin
            Result:=nil;
            if not Assigned(lType) then exit;
@@ -229,9 +229,9 @@ procedure TFrmRTTIExplLite.LoadClasses;
 
         function FindFirstTRttiTypeOrphan:TTreeNode;
         var
-          i        : integer;
-          Node     : TTreeNode;
-          lType    : TRttiType;
+          i: integer;
+          Node: TTreeNode;
+          lType: TRttiType;
         begin
            Result:=nil;
              for i:=0 to TreeViewClasses.Items.Count-1 do
@@ -250,10 +250,10 @@ procedure TFrmRTTIExplLite.LoadClasses;
         end;
 
 var
-  TypeList : TArray<TRttiType>;
-  lType    : TRttiType;
-  PNode    : TTreeNode;
-  Node     : TTreeNode;
+  TypeList: TArray<TRttiType>;
+  lType: TRttiType;
+  PNode: TTreeNode;
+  Node: TTreeNode;
 begin
   TreeViewClasses.Items.BeginUpdate;
   try
@@ -293,20 +293,20 @@ procedure TFrmRTTIExplLite.LoadTree;
     end;
 
 var
-  lType    : TRttiType;
-  lMethod  : TRttiMethod;
+  lType: TRttiType;
+  lMethod: TRttiMethod;
   lProperty: TRttiProperty;
-  lField   : TRttiField;
+  lField: TRttiField;
 
-  PNode    : TTreeNode;
-  Node     : TTreeNode;
+  PNode: TTreeNode;
+  Node: TTreeNode;
 
-  TypeList : TArray<TRttiType>;
-  Units    : TStrings;
-  UnitName : string;
+  TypeList: TArray<TRttiType>;
+  Units: TStrings;
+  UnitName: string;
 
-  Package  : TRttiPackage;
-  PackageN : TTreeNode;
+  Package: TRttiPackage;
+  PackageN: TTreeNode;
 begin
   TreeViewRtti.Items.BeginUpdate;
   TreeViewRtti.Items.Clear;
@@ -354,15 +354,15 @@ end;
 
 procedure TFrmRTTIExplLite.TreeViewRttiChange(Sender: TObject; Node: TTreeNode);
 Var
-  aNode    : TTreeNode;
-  lTyp     : TRttiType;
-  lType    : TRttiType;
-  lMethod  : TRttiMethod;
+  aNode: TTreeNode;
+  lTyp: TRttiType;
+  lType: TRttiType;
+  lMethod: TRttiMethod;
   lProperty: TRttiProperty;
-  lProp    : TRttiProperty;
-  lField   : TRttiField;
+  lProp: TRttiProperty;
+  lField: TRttiField;
 
-  Item     : TListItem;
+  Item: TListItem;
 begin
    aNode:=TreeViewRtti.Selected;
    if aNode<>nil then
@@ -473,156 +473,148 @@ procedure TFrmRTTIExplLite.TreeViewRttiCustomDrawItem(Sender: TCustomTreeView;
 var
   FontColor: TColor;
   BackColor: TColor;
-  lType    : TRttiType;
-  //lMethod  : TRttiMethod;
+  lType: TRttiType;
+  //lMethod: TRttiMethod;
   //lProperty: TRttiProperty;
-  //lField   : TRttiField;
+  //lField: TRttiField;
 begin
-  FontColor                := Sender.Canvas.Font.Color;
+  FontColor := Sender.Canvas.Font.Color;
   Sender.Canvas.Font.Color := clNavy;
   Sender.Canvas.Font.Color := FontColor;
-  BackColor                := clWindow;
-  FontColor                := clWindowText;
+  BackColor := clWindow;
+  FontColor := clWindowText;
 
-      case Node.Level of
-       Package_Level :
-                    Begin
-                     FontColor := clBlack;
-                     Sender.Canvas.Font.Style := [fsBold];
-                    end;
-
-       Unit_Level :
-                    Begin
-                     FontColor := clRed;
-                    end;
-
-       Type_Level :
-                    Begin
-                      lType:=Node.Data;
-
-                          if lType<>nil then
-                          case lType.TypeKind of
-                           tkClass : Begin
-                                        FontColor                := clGreen;
-                                        Sender.Canvas.Font.Style := [fsBold]
-                                     End;
-
-                            else     FontColor := clBlue;
-
-                          end;
-                     end;
-
-      Field_Level :
-                      begin
-                         if Node.Data=nil then  exit;
-
-                           if TRttiObject(Node.Data).ClassNameIs('TRttiInstanceMethodEx') then
-                           begin
-                               //lMethod:=Node.Data;
-                               FontColor := clGray;
-                           end
-                           else
-                           if TRttiObject(Node.Data).ClassNameIs('TRttiInstancePropertyEx') then
-                           begin
-                               //lProperty:=Node.Data;
-                               FontColor := clNavy;
-                           end;
-                     end;
-      end;
-
-
-      if (Node.Selected) then
+  case Node.Level of
+    Package_Level :
       begin
-          BackColor := clHighlight;
-          FontColor := clWindow;
+       FontColor := clBlack;
+       Sender.Canvas.Font.Style := [fsBold];
       end;
+    
+    Unit_Level :
+      begin
+        FontColor := clRed;
+      end;
+    
+    Type_Level :
+      begin
+        lType := Node.Data;
+        if lType<>nil then
+        case lType.TypeKind of
+          tkClass: 
+            begin
+              FontColor := clGreen;
+              Sender.Canvas.Font.Style := [fsBold]
+            End;
+            else FontColor := clBlue;
+        end;
+      end;
+    Field_Level :
+      begin
+        if Node.Data = nil then exit;
+ 
+        if TRttiObject(Node.Data).ClassNameIs('TRttiInstanceMethodEx') then
+        begin
+          //lMethod:=Node.Data;
+          FontColor := clGray;
+        end
+        else
+        if TRttiObject(Node.Data).ClassNameIs('TRttiInstancePropertyEx') then
+        begin
+          //lProperty:=Node.Data;
+          FontColor := clNavy;
+        end;
+      end;
+  end;
 
-      Sender.Canvas.Brush.Color := BackColor;
-      Sender.Canvas.Font.Color  := FontColor;
-      DefaultDraw := True;
+  if (Node.Selected) then
+  begin
+    BackColor := clHighlight;
+    FontColor := clWindow;
+  end;
+
+  Sender.Canvas.Brush.Color := BackColor;
+  Sender.Canvas.Font.Color := FontColor;
+  DefaultDraw := True;
 end;
 
 procedure TFrmRTTIExplLite.TreeViewRttiDblClick(Sender: TObject);
 
-      function FindRttyType(lType:TRttiType):TTreeNode;
-      var
-        i        : integer;
-      begin
-         Result:=nil;
-         for i:=0 to TreeViewRtti.Items.Count-1 do
-         if TreeViewRtti.Items[i].Level=Type_Level then
-         begin
-            Result:=TreeViewRtti.Items[i];
-            if Assigned(Result.Data) then
-             if lType.QualifiedName=TRttiType(Result.Data).QualifiedName then
-             break;
-         end;
-
-      end;
+  function FindRttyType(lType:TRttiType):TTreeNode;
+  var
+    i: integer;
+  begin
+    Result := nil;
+    for i:= 0 to TreeViewRtti.Items.Count-1 do
+    if TreeViewRtti.Items[i].Level=Type_Level then
+    begin
+      Result := TreeViewRtti.Items[i];
+      if Assigned(Result.Data) then
+        if lType.QualifiedName = TRttiType(Result.Data).QualifiedName then
+          break;
+    end;
+  end;
 
 Var
-  Node     : TTreeNode;
-  lType    : TRttiType;
-  lMethod  : TRttiMethod;
+  Node: TTreeNode;
+  lType: TRttiType;
+  lMethod: TRttiMethod;
   lProperty: TRttiProperty;
-  lField   : TRttiField;
+  lField: TRttiField;
 begin
-   Node:=TreeViewRtti.Selected;
-      case Node.Level of
-       Field_Level :
-                       begin
-
-                           if TRttiObject(Node.Data).ClassNameIs('TRttiInstanceFieldEx') then
-                           begin
-                               lField :=Node.Data;
-                               lType  :=ctx.FindType(lField.FieldType.QualifiedName);
-                               if Assigned(lType) then
-                               begin
-                                  Node:=FindRttyType(lType);
-                                  if Node<>nil then
-                                  begin
-                                    Node.MakeVisible;
-                                    TreeViewRtti.Selected:=Node;
-                                  end;
-                               end;
-                           end
-                           else
-                           if TRttiObject(Node.Data).ClassNameIs('TRttiInstancePropertyEx') then
-                           begin
-                               lProperty :=Node.Data;
-                               lType     :=ctx.FindType(lProperty.PropertyType.QualifiedName);
-                               if Assigned(lType) then
-                               begin
-                                  Node:=FindRttyType(lType);
-                                  if Node<>nil then
-                                  begin
-                                    Node.MakeVisible;
-                                    TreeViewRtti.Selected:=Node;
-                                  end;
-                               end;
-                           end
-                           else
-                           if TRttiObject(Node.Data).ClassNameIs('TRttiInstanceMethodEx') then
-                           begin
-                               lMethod   :=Node.Data;
-                               if lMethod.HasExtendedInfo and (lMethod.MethodKind in [mkFunction,mkClassFunction]) then
-                               begin
-                                   lType     :=ctx.FindType(lMethod.ReturnType.QualifiedName);
-                                   if Assigned(lType) then
-                                   begin
-                                      Node:=FindRttyType(lType);
-                                      if Node<>nil then
-                                      begin
-                                        Node.MakeVisible;
-                                        TreeViewRtti.Selected:=Node;
-                                      end;
-                                   end;
-                               end;
-                           end;
-
-
-                       end;
+  Node:=TreeViewRtti.Selected;
+  case Node.Level of
+   Field_Level :
+    begin
+      if TRttiObject(Node.Data).ClassNameIs('TRttiInstanceFieldEx') then
+      begin
+          lField := Node.Data;
+          lType := ctx.FindType(lField.FieldType.QualifiedName);
+          if Assigned(lType) then
+          begin
+             Node := FindRttyType(lType);
+             if Node <> nil then
+             begin
+               Node.MakeVisible;
+               TreeViewRtti.Selected := Node;
+             end;
+          end;
+      end
+      else
+      if TRttiObject(Node.Data).ClassNameIs('TRttiInstancePropertyEx') then
+      begin
+        lProperty := Node.Data;
+        lType := ctx.FindType(lProperty.PropertyType.QualifiedName);
+        if Assigned(lType) then
+        begin
+          Node := FindRttyType(lType);
+          if Node<>nil then
+          begin
+            Node.MakeVisible;
+            TreeViewRtti.Selected:=Node;
+          end;
+        end;
+      end
+      else
+      if TRttiObject(Node.Data).ClassNameIs('TRttiInstanceMethodEx') then
+      begin
+        lMethod := Node.Data;
+        if lMethod.HasExtendedInfo and (lMethod.MethodKind in [mkFunction,mkClassFunction]) then
+        begin
+          lType := ctx.FindType(lMethod.ReturnType.QualifiedName);
+          if Assigned(lType) then
+          begin
+            Node := FindRttyType(lType);
+            if Node <> nil then
+            begin
+              Node.MakeVisible;
+              TreeViewRtti.Selected:=Node;
+            end;
+          end;
+        end;
       end;
+    end;
+  end;
 end;
 
 end.

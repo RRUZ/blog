@@ -31,11 +31,11 @@ uses
 type
   THostPreviewHandler = class(TCustomControl)
   private
-    FFileStream     : TFileStream;
-    FPreviewGUIDStr : string;
+    FFileStream: TFileStream;
+    FPreviewGUIDStr: string;
     FFileName: string;
     FLoaded :Boolean;
-    FPreviewHandler : IPreviewHandler;
+    FPreviewHandler: IPreviewHandler;
     procedure SetFileName(const Value: string);
     procedure LoadPreviewHandler;
     procedure WMSize(var Message: TWMSize); message WM_SIZE;
@@ -178,13 +178,13 @@ procedure THostPreviewHandler.LoadPreviewHandler;
 const
   GUID_ISHELLITEM = '{43826d1e-e718-42ee-bc55-a1e261c37bfe}';
 var
-  prc                   : TRect;
-  LPreviewGUID          : TGUID;
-  LInitializeWithFile   : IInitializeWithFile;
-  LInitializeWithStream : IInitializeWithStream;
-  LInitializeWithItem   : IInitializeWithItem;
-  LIStream              : IStream;
-  LShellItem            : IShellItem;
+  prc: TRect;
+  LPreviewGUID: TGUID;
+  LInitializeWithFile: IInitializeWithFile;
+  LInitializeWithStream: IInitializeWithStream;
+  LInitializeWithItem: IInitializeWithItem;
+  LIStream: IStream;
+  LShellItem: IShellItem;
 begin
 
   FLoaded:=False;
@@ -235,7 +235,7 @@ end;
 
 procedure THostPreviewHandler.WMSize(var Message: TWMSize);
 var
-  prc  : TRect;
+  prc: TRect;
 begin
   inherited;
   if FPreviewHandler<>nil then

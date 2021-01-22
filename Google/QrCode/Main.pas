@@ -41,17 +41,17 @@ TQrImage_ErrCorrLevel=(L,M,Q,H);
 
 const
 UrlGoogleQrCode='http://chart.apis.google.com/chart?chs=%dx%d&cht=qr&chld=%s&chl=%s';
-QrImgCorrStr   : array [TQrImage_ErrCorrLevel] of string=('L','M','Q','H');
+QrImgCorrStr: array [TQrImage_ErrCorrLevel] of string=('L','M','Q','H');
 
 
 procedure WinInet_HttpGet(const Url: string;Stream:TStream);
 const
 BuffSize = 1024*1024;
 var
-  hInter   : HINTERNET;
+  hInter: HINTERNET;
   UrlHandle: HINTERNET;
   BytesRead: DWORD;
-  Buffer   : Pointer;
+  Buffer: Pointer;
 begin
   hInter := InternetOpen('', INTERNET_OPEN_TYPE_PRECONFIG, nil, nil, 0);
   if Assigned(hInter) then
@@ -76,9 +76,9 @@ begin
   end
 end;
 
-procedure GetQrCode(Width,Height:Word;Correction_Level:TQrImage_ErrCorrLevel;const Data:string;StreamImage : TMemoryStream);
+procedure GetQrCode(Width,Height:Word;Correction_Level:TQrImage_ErrCorrLevel;const Data:string;StreamImage: TMemoryStream);
 Var
- EncodedURL  : string;
+ EncodedURL: string;
 begin
   EncodedURL:=Format(UrlGoogleQrCode,[Width,Height,QrImgCorrStr[Correction_Level],HTTPEncode(Data)]);
   WinInet_HttpGet(EncodedURL,StreamImage);
@@ -87,8 +87,8 @@ end;
 
 procedure TFrmMain.BtnGenerateClick(Sender: TObject);
 var
-ImageStream : TMemoryStream;
-PngImage    : TPngImage;
+ImageStream: TMemoryStream;
+PngImage: TPngImage;
 begin
  Image1.Picture:=nil;
  ImageStream:=TMemoryStream.Create;

@@ -79,7 +79,7 @@ end;
 
 procedure TFrmMain.BtnEQClick(Sender: TObject);
 var
- Frm : TFrmStyleEqualizer;
+ Frm: TFrmStyleEqualizer;
 begin
  Frm:=TFrmStyleEqualizer.Create(Self);
  Frm.StyleBook:=StyleBook1;

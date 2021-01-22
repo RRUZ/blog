@@ -1,5 +1,5 @@
-//Author Rodrigo Ruz V.
-//2011-08-01
+// Author Rodrigo Ruz V.
+// 2011-08-01
 
 unit uSMBIOS;
 
@@ -51,7 +51,7 @@ type
     ReleaseDate: Byte;
     BiosRomSize: Byte;
     Characteristics: Int64;
-    ExtensionBytes : array [0..1] of Byte;
+    ExtensionBytes: array [0..1] of Byte;
   end;
 
   TSysInfo = packed record
@@ -124,7 +124,7 @@ type
 
   TSMBiosTableEntry = record
     Header: TSmBiosTableHeader;
-    Index : Integer;
+    Index: Integer;
   end;
 
   TSMBios = class
@@ -166,25 +166,25 @@ type
     property Buffer: PByteArray read FBuffer;
     property DataString: AnsiString read FDataString;
     property DmiRevision: Integer read FDmiRevision;
-    property SmbiosMajorVersion : Integer read FSmbiosMajorVersion;
-    property SmbiosMinorVersion : Integer read FSmbiosMinorVersion;
-    property SMBiosTablesList : TList read FSMBiosTablesList;
+    property SmbiosMajorVersion: Integer read FSmbiosMajorVersion;
+    property SmbiosMinorVersion: Integer read FSmbiosMinorVersion;
+    property SMBiosTablesList: TList read FSMBiosTablesList;
 
     property BiosInfo: TBiosInfo read FBiosInfo Write FBiosInfo;
     property BiosInfoIndex: Integer read FBiosInfoIndex Write FBiosInfoIndex;
-    property HasBiosInfo : Boolean read GetHasBiosInfo;
+    property HasBiosInfo: Boolean read GetHasBiosInfo;
     property SysInfo: TSysInfo read FSysInfo Write FSysInfo;
     property SysInfoIndex: Integer read FSysInfoIndex Write FSysInfoIndex;
-    property HasSysInfo : Boolean read GetHasSysInfo;
+    property HasSysInfo: Boolean read GetHasSysInfo;
     property BaseBoardInfo: TBaseBoardInfo read FBaseBoardInfo write FBaseBoardInfo;
     property BaseBoardInfoIndex: Integer read FBaseBoardInfoIndex Write FBaseBoardInfoIndex;
-    property HasBaseBoardInfo : Boolean read GetHasBaseBoardInfo;
+    property HasBaseBoardInfo: Boolean read GetHasBaseBoardInfo;
     property EnclosureInfo: TEnclosureInfo read FEnclosureInfo write FEnclosureInfo;
     property EnclosureInfoIndex: Integer read FEnclosureInfoIndex Write FEnclosureInfoIndex;
-    property HasEnclosureInfo : Boolean read GetHasEnclosureInfo;
+    property HasEnclosureInfo: Boolean read GetHasEnclosureInfo;
     property ProcessorInfo: TProcessorInfo read FProcessorInfo write FProcessorInfo;
     property ProcessorInfoIndex: Integer read FProcessorInfoIndex Write FProcessorInfoIndex;
-    property HasProcessorInfo : Boolean read GetHasProcessorInfo;
+    property HasProcessorInfo: Boolean read GetHasProcessorInfo;
   end;
 
 implementation
@@ -242,10 +242,10 @@ end;
 
 function TSMBios.SearchSMBiosTable(TableType: SMBiosTables): integer;
 Var
-  Index  : integer;
-  Header : TSmBiosTableHeader;
+  Index: integer;
+  Header: TSmBiosTableHeader;
 begin
-  Index     := 0;
+  Index := 0;
   repeat
     Move(Buffer[Index], Header, SizeOf(Header));
 
@@ -296,7 +296,7 @@ end;
 
 function TSMBios.GetSMBiosTableIndex(TableType: SMBiosTables): integer;
 Var
- Entry : TSMBiosTableEntry;
+ Entry: TSMBiosTableEntry;
 begin
  Result:=-1;
   for Entry in FSMBiosTablesList do
@@ -309,12 +309,12 @@ end;
 
 function TSMBios.GetSMBiosTablesList: TList;
 Var
-  Index : integer;
+  Index: integer;
   Header: TSmBiosTableHeader;
-  Entry    : TSMBiosTableEntry;
+  Entry: TSMBiosTableEntry;
 begin
-  Result    := TList.Create;
-  Index     := 0;
+  Result := TList.Create;
+  Index := 0;
   repeat
     Move(Buffer[Index], Header, SizeOf(Header));
     Entry.Header:=Header;

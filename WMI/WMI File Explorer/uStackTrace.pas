@@ -14,11 +14,11 @@ end;
 
 function GetStackInfoStringProc(Info: Pointer): string;
 var
-  StackInfoList : TJclStackInfoList;
-  List  : TStringList;
+  StackInfoList: TJclStackInfoList;
+  List: TStringList;
 begin
   if Info = nil then Exit;
-  List  := TStringList.Create;
+  List := TStringList.Create;
   try
    StackInfoList := TJclStackInfoList(Info);
    StackInfoList.AddToStrings(List);
@@ -37,16 +37,16 @@ initialization
   if JclStartExceptionTracking then
   begin
     Exception.GetExceptionStackInfoProc := GetExceptionStackInfoProc;
-    Exception.GetStackInfoStringProc    := GetStackInfoStringProc;
-    Exception.CleanUpStackInfoProc      := CleanUpStackInfoProc;
+    Exception.GetStackInfoStringProc := GetStackInfoStringProc;
+    Exception.CleanUpStackInfoProc := CleanUpStackInfoProc;
   end;
 
 finalization
   if JclExceptionTrackingActive then
   begin
     Exception.GetExceptionStackInfoProc := nil;
-    Exception.GetStackInfoStringProc    := nil;
-    Exception.CleanUpStackInfoProc      := nil;
+    Exception.GetStackInfoStringProc := nil;
+    Exception.CleanUpStackInfoProc := nil;
     JclStopExceptionTracking;
   end;
 end.

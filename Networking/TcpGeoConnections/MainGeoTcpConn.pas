@@ -30,10 +30,10 @@ type
     procedure ComboBoxTypesChange(Sender: TObject);
     procedure ButtonReloadClick(Sender: TObject);
   private
-    FCurrentMapType   : TWebMapTypes;
-    FLocalIpAddresses : TStrings;
+    FCurrentMapType: TWebMapTypes;
+    FLocalIpAddresses: TStrings;
     FLocalComputerName: string;
-    FExtendedTcpTable : PMIB_TCPTABLE_OWNER_PID;
+    FExtendedTcpTable: PMIB_TCPTABLE_OWNER_PID;
     FExternalIpAddress: string;
     procedure GetMapListItem;
     procedure LoadTCPConnections;
@@ -72,16 +72,16 @@ const
 type
    TResolveGeoLocation = class(TThread)
    private
-     FListItem         : TListItem;
-     FGeoInfo          : TGeoInfoClass;
-     FRemoteHostName   : string;
-     FRemoteIP         : string;
-     FServer           : Cardinal;
-     FImageList        : TImageList;
+     FListItem: TListItem;
+     FGeoInfo: TGeoInfoClass;
+     FRemoteHostName: string;
+     FRemoteIP: string;
+     FServer: Cardinal;
+     FImageList: TImageList;
      procedure SetData;
    protected
      procedure Execute; override;
-     constructor Create(Server : Cardinal;const RemoteIP:string;ImageList:TImageList;ListItem:TListItem);
+     constructor Create(Server: Cardinal;const RemoteIP:string;ImageList:TImageList;ListItem:TListItem);
    end;
 
 {
@@ -101,7 +101,7 @@ end;
 
 procedure TFrmMain.ComboBoxMapsChange(Sender: TObject);
 var
-  i : Integer;
+  i: Integer;
 begin
   FCurrentMapType:=TWebMapTypes(ComboBoxMaps.ItemIndex);
 
@@ -109,9 +109,9 @@ begin
   case FCurrentMapType of
    Google_Maps: for i:= Low(GoogleMapsTypes) to High(GoogleMapsTypes) do
                   ComboBoxTypes.Items.Add(GoogleMapsTypes[i]);
-   Bing_Map   : for i:= Low(BingMapsTypes) to High(BingMapsTypes) do
+   Bing_Map: for i:= Low(BingMapsTypes) to High(BingMapsTypes) do
                   ComboBoxTypes.Items.Add(BingMapsTypes[i]);
-   Yahoo_Map  : for i:= Low(YahooMapsTypes) to High(YahooMapsTypes) do
+   Yahoo_Map: for i:= Low(YahooMapsTypes) to High(YahooMapsTypes) do
                   ComboBoxTypes.Items.Add(YahooMapsTypes[i]);
   end;
 
@@ -131,8 +131,8 @@ end;
 
 procedure TFrmMain.FormCreate(Sender: TObject);
 var
-   libHandle : THandle;
-   MapType   : TWebMapTypes;
+   libHandle: THandle;
+   MapType: TWebMapTypes;
 begin
   FLocalIpAddresses :=TStringList.Create;
   TIdStack.IncUsage;
@@ -142,7 +142,7 @@ begin
     TIdStack.DecUsage;
   end;
   FLocalComputerName:=GetLocalComputerName;
-  libHandle           := LoadLibrary(iphlpapi);
+  libHandle := LoadLibrary(iphlpapi);
   GetExtendedTcpTable := GetProcAddress(libHandle, 'GetExtendedTcpTable');
 
   for MapType:=Low(TWebMapTypes) to High(TWebMapTypes) do
@@ -179,14 +179,14 @@ end;
 
 procedure TFrmMain.GetMapListItem();
 var
- HTMLWindow2  : IHTMLWindow2;
- MemoryStream : TMemoryStream;
- Item         : TListItem;
- Lat          : AnsiString;
- Lng          : AnsiString;
- Title        : AnsiString;
- MapType      : string;
- MapStr       : AnsiString;
+ HTMLWindow2: IHTMLWindow2;
+ MemoryStream: TMemoryStream;
+ Item: TListItem;
+ Lat: AnsiString;
+ Lng: AnsiString;
+ Title: AnsiString;
+ MapType: string;
+ MapStr: AnsiString;
 
 //sorry , but tha html pages contains a lot of % (porcent) chars
 function ReplaceTag(const PageStr,Tag,NewValue:string):AnsiString;
@@ -216,10 +216,10 @@ begin
       MemoryStream := TMemoryStream.Create;
       try
         case FCurrentMapType of
-          Google_Maps    : MapStr:=GoogleMapsPage;
-          Yahoo_Map      : MapStr:=YahooMapsPage;
-          Bing_Map       : MapStr:=BingsMapsPage;
-          Open_Streetmap : MapStr:=OpenStreetMapsPage;
+          Google_Maps: MapStr:=GoogleMapsPage;
+          Yahoo_Map: MapStr:=YahooMapsPage;
+          Bing_Map: MapStr:=BingsMapsPage;
+          Open_Streetmap: MapStr:=OpenStreetMapsPage;
         end;
 
         MapStr:=ReplaceTag(MapStr,'[Lat]',Lat);
@@ -240,31 +240,31 @@ end;
 {
 procedure TFrmMain.GetMapListItem(Item: TListItem);
 var
-  StreamData : TMemoryStream;
-  JPEGImage  : TJPEGImage;
-  UrlImage   : string;
-  lHTTP      : TIdHTTP;
-  Server     : Cardinal;
-  IsLocal    : Boolean;
+  StreamData: TMemoryStream;
+  JPEGImage: TJPEGImage;
+  UrlImage: string;
+  lHTTP: TIdHTTP;
+  Server: Cardinal;
+  IsLocal: Boolean;
 begin
 
   if Item.SubItems.Count<COLUMN_Latitude then Exit;
   if Item.SubItems[COLUMN_Latitude]='' then Exit;
 
-  UrlImage   := BuildUrlStaticMapUrl(Item.SubItems[COLUMN_Latitude],Item.SubItems[COLUMN_Longitude],'hybrid','jpg',FCurrentZoom,400,400,True);
-  Server     := Cardinal(Item.SubItems.Objects[COLUMN_RemoteServer]);
-  IsLocal    := (FLocalIpAddresses.IndexOf(Item.SubItems[COLUMN_RemoteIP])>=0) or (Server=0) or (Server=16777343);
+  UrlImage := BuildUrlStaticMapUrl(Item.SubItems[COLUMN_Latitude],Item.SubItems[COLUMN_Longitude],'hybrid','jpg',FCurrentZoom,400,400,True);
+  Server := Cardinal(Item.SubItems.Objects[COLUMN_RemoteServer]);
+  IsLocal := (FLocalIpAddresses.IndexOf(Item.SubItems[COLUMN_RemoteIP])>=0) or (Server=0) or (Server=16777343);
 
   if Assigned(Item.Data) then
   begin
-     JPEGImage  := TJPEGImage(Item.Data);
+     JPEGImage := TJPEGImage(Item.Data);
      ImageMap.Picture.Assign(JPEGImage);
   end
   else
   begin
       StreamData := TMemoryStream.Create;
-      JPEGImage  := TJPEGImage.Create;
-      lHTTP      := TIdHTTP.Create(nil);
+      JPEGImage := TJPEGImage.Create;
+      lHTTP := TIdHTTP.Create(nil);
       lHTTP.Request.UserAgent:='Mozilla/3.0';
       try
         try
@@ -273,7 +273,7 @@ begin
          JPEGImage.LoadFromStream(StreamData);
          ImageMap.Picture.Assign(JPEGImage);
          //Item.Data:=JPEGImage;
-        except on E : Exception Do
+        except on E: Exception Do
          MessageDlg('Exception: '+E.Message,mtError, [mbOK], 0);
         end;
       finally
@@ -292,16 +292,16 @@ end;
 
 procedure TFrmMain.LoadTCPConnections;
 var
-   Server       : Cardinal;
-   Error        : DWORD;
-   TableSize    : DWORD;
-   Snapshot     : THandle;
-   i            : integer;
-   ListItem     : TListItem;
-   IpAddress    : in_addr;
-   FCurrentPid  : Cardinal;
-   IsLocal      : Boolean;
-   RemoteIp     : string;
+   Server: Cardinal;
+   Error: DWORD;
+   TableSize: DWORD;
+   Snapshot: THandle;
+   i: integer;
+   ListItem: TListItem;
+   IpAddress: in_addr;
+   FCurrentPid: Cardinal;
+   IsLocal: Boolean;
+   RemoteIp: string;
 begin
    ListViewIPaddress.Items.BeginUpdate;
    try
@@ -320,9 +320,9 @@ begin
             if (FExtendedTcpTable.Table[i].dwOwningPid<>0) and (FExtendedTcpTable.Table[i].dwOwningPid<>FCurrentPid) and (FExtendedTcpTable.Table[i].dwRemoteAddr<>0) then
             begin
                IpAddress.s_addr := FExtendedTcpTable.Table[i].dwRemoteAddr;
-               RemoteIp  := string(inet_ntoa(IpAddress));
-               Server     :=  FExtendedTcpTable.Table[i].dwRemoteAddr;
-               IsLocal    := (FLocalIpAddresses.IndexOf(RemoteIp)>=0) or (Server=0) or (Server=16777343);// or IpAddressIsLAN(RemoteIp);
+               RemoteIp := string(inet_ntoa(IpAddress));
+               Server :=  FExtendedTcpTable.Table[i].dwRemoteAddr;
+               IsLocal := (FLocalIpAddresses.IndexOf(RemoteIp)>=0) or (Server=0) or (Server=16777343);// or IpAddressIsLAN(RemoteIp);
 
                if CheckBoxRemote.Checked and IsLocal then Continue;
                if FExtendedTcpTable.Table[i].dwRemoteAddr = 0 then
@@ -364,7 +364,7 @@ begin
     for i:= 0 to ListViewIPaddress.Items.Count-1 do
     begin
       Server:=Cardinal(ListViewIPaddress.Items.Item[i].SubItems.Objects[COLUMN_RemoteServer]);
-      IsLocal    := (FLocalIpAddresses.IndexOf(ListViewIPaddress.Items.Item[i].SubItems[COLUMN_RemoteIP])>=0) or (Server=0) or (Server=16777343);
+      IsLocal := (FLocalIpAddresses.IndexOf(ListViewIPaddress.Items.Item[i].SubItems[COLUMN_RemoteIP])>=0) or (Server=0) or (Server=16777343);
       if not IsLocal then
         TResolveGeoLocation.Create(Server,ListViewIPaddress.Items.Item[i].SubItems[COLUMN_RemoteIP],ImageList1,ListViewIPaddress.Items.Item[i]);
     end;
@@ -396,7 +396,7 @@ end;
 
 procedure TResolveGeoLocation.SetData;
 var
-   Bitmap  : TBitmap;
+   Bitmap: TBitmap;
 begin
     FListItem.SubItems[COLUMN_RemoteServer]:=FRemoteHostName;
     FListItem.SubItems[COLUMN_Country]     :=FGeoInfo.GeoInfo.CountryName;
