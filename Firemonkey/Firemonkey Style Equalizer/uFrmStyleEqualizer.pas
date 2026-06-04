@@ -57,17 +57,17 @@ type
     procedure Timer1Timer(Sender: TObject);
     procedure TrackBarRedChange(Sender: TObject);
   private
-    StyleEqualizer   : TStyleEqualizer;
+    StyleEqualizer: TStyleEqualizer;
     FStyleBook: TStyleBook;
-    FApplied  : Boolean;
-    FIdleMSec : DWord;
+    FApplied: Boolean;
+    FIdleMSec: DWord;
     procedure SetStyleBook(const Value: TStyleBook);
-    procedure GetCurrentHSLValues(var dh, ds, dl : single);
-    procedure GetCurrentRGBValues(var dr, dg, db : byte);
+    procedure GetCurrentHSLValues(var dh, ds, dl: single);
+    procedure GetCurrentRGBValues(var dr, dg, db: byte);
     procedure ApplyHSLChanges;
     procedure ApplyRGBChanges;
   public
-    property StyleBook : TStyleBook read FStyleBook write SetStyleBook;
+    property StyleBook: TStyleBook read FStyleBook write SetStyleBook;
   end;
 
 
@@ -99,8 +99,8 @@ end;
 
 procedure TFrmStyleEqualizer.ApplyHSLChanges;
 var
-  dh, ds, dl : single;
-  s : TStopwatch;
+  dh, ds, dl: single;
+  s: TStopwatch;
 begin
    GetCurrentHSLValues(dh, ds, dl);
    s:=TStopwatch.Create;
@@ -115,8 +115,8 @@ end;
 
 procedure TFrmStyleEqualizer.ApplyRGBChanges;
 var
-  dr, dg, db : byte;
-  s : TStopwatch;
+  dr, dg, db: byte;
+  s: TStopwatch;
 begin
    GetCurrentRGBValues(dr, dg, db);
    if (dr>0) or (dg>0) or (db>0) then

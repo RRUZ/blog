@@ -44,9 +44,9 @@ end;
 
 procedure TFrmMain.ListStyleHooks;
 var
- RttiType  : TRttiType;
- Item      : TListItem;
- List      : TStyleHookList;
+ RttiType: TRttiType;
+ Item: TListItem;
+ List: TStyleHookList;
  StyleClass: TStyleHookClass;
 begin
   for RttiType in TRttiContext.Create.GetTypes do

@@ -21,7 +21,7 @@ type
   private
     { Private declarations }
 
-    Procedure SetOwnerDraw(Value : Boolean);
+    Procedure SetOwnerDraw(Value: Boolean);
   public
     { Public declarations }
   end;
@@ -45,8 +45,8 @@ end;
 
 procedure TFrmMain.FormCreate(Sender: TObject);
 var
- i    :  integer;
- Item : TListItem;
+ i:  integer;
+ Item: TListItem;
 begin
   SetOwnerDraw(CheckBox1.Checked);
   for i:=0 to 99 do
@@ -65,9 +65,9 @@ end;
 
 procedure TFrmMain.ListBox1DrawItem(Control: TWinControl; Index: Integer; Rect: TRect; State: TOwnerDrawState);
 Var
- LListBox : TListBox;
- LStyles  : TCustomStyleServices;
- LDetails : TThemedElementDetails;
+ LListBox: TListBox;
+ LStyles: TCustomStyleServices;
+ LDetails: TThemedElementDetails;
 begin
   LListBox :=TListBox(Control);
   LStyles  :=StyleServices;
@@ -92,15 +92,15 @@ end;
 procedure TFrmMain.ListView1DrawItem(Sender: TCustomListView; Item: TListItem;
   Rect: TRect; State: TOwnerDrawState);
 var
-  r         : TRect;
-  rc        : TRect;
-  ColIdx    : Integer;
-  s         : string;
-  LDetails  : TThemedElementDetails;
-  LStyles   : TCustomStyleServices;
-  BoxSize   : TSize;
-  Spacing   : Integer;
-  LColor    : TColor;
+  r: TRect;
+  rc: TRect;
+  ColIdx: Integer;
+  s: string;
+  LDetails: TThemedElementDetails;
+  LStyles: TCustomStyleServices;
+  BoxSize: TSize;
+  Spacing: Integer;
+  LColor: TColor;
 begin
   Spacing:=4;
   LStyles:=StyleServices;
@@ -108,7 +108,7 @@ begin
   LColor := LStyles.GetSystemColor(clWindowText);
 
   Sender.Canvas.Brush.Color := LStyles.GetStyleColor(scListView);
-  Sender.Canvas.Font.Color  := LColor;
+  Sender.Canvas.Font.Color := LColor;
   Sender.Canvas.FillRect(Rect);
 
   r := Rect;
@@ -157,10 +157,10 @@ begin
     if (ColIdx=0) and TListView(Sender).Checkboxes then
     begin
       rc := Rect;
-      rc.Top    := Rect.Top + (Rect.Bottom - Rect.Top - BoxSize.cy) div 2;
+      rc.Top := Rect.Top + (Rect.Bottom - Rect.Top - BoxSize.cy) div 2;
       rc.Bottom := rc.Top + BoxSize.cy;
-      rc.Left   := rc.Left + Spacing;
-      rc.Right  := rc.Left + BoxSize.cx;
+      rc.Left := rc.Left + Spacing;
+      rc.Right := rc.Left + BoxSize.cx;
 
       if Item.Checked then
        LDetails := StyleServices.GetElementDetails(tbCheckBoxUncheckedNormal)

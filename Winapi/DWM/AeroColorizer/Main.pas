@@ -38,13 +38,13 @@ uses
 
 type
  tagCOLORIZATIONPARAMS = record
-	clrColor        : COLORREF;  //ColorizationColor
-  clrAftGlow      : COLORREF;  //ColorizationAfterglow
-  nIntensity      : UINT;      //ColorizationColorBalance -> 0-100
-	clrAftGlowBal   : UINT;      //ColorizationAfterglowBalance
-	clrBlurBal      : UINT;      //ColorizationBlurBalance
-	clrGlassReflInt : UINT;      //ColorizationGlassReflectionIntensity
-	fOpaque         : BOOL;
+	clrColor: COLORREF;  //ColorizationColor
+  clrAftGlow: COLORREF;  //ColorizationAfterglow
+  nIntensity: UINT;      //ColorizationColorBalance -> 0-100
+	clrAftGlowBal: UINT;      //ColorizationAfterglowBalance
+	clrBlurBal: UINT;      //ColorizationBlurBalance
+	clrGlassReflInt: UINT;      //ColorizationGlassReflectionIntensity
+	fOpaque: BOOL;
 end;
 
 
@@ -54,21 +54,21 @@ end;
 
  TDwmGetColorizationParameters = procedure(out parameters :TColorizationParams); stdcall;
  TDwmSetColorizationParameters = procedure(parameters :PColorizationParams;unknown:BOOL); stdcall;
- TDwmIsCompositionEnabled      = function(out pfEnabled : BOOL): HRESULT; stdcall;
+ TDwmIsCompositionEnabled      = function(out pfEnabled: BOOL): HRESULT; stdcall;
 
 var
- DwmGetColorizationParameters : TDwmGetColorizationParameters;
- DwmSetColorizationParameters : TDwmSetColorizationParameters;
- DwmIsCompositionEnabled      : TDwmIsCompositionEnabled;
+ DwmGetColorizationParameters: TDwmGetColorizationParameters;
+ DwmSetColorizationParameters: TDwmSetColorizationParameters;
+ DwmIsCompositionEnabled: TDwmIsCompositionEnabled;
 
- hdwmapi       : Cardinal;
- OldHandle     : THandle;
+ hdwmapi: Cardinal;
+ OldHandle: THandle;
 
 {$R *.dfm}
 
 function  IsAeroEnabled: Boolean;
 var
-  pfEnabled : BOOL;
+  pfEnabled: BOOL;
 begin
  Result:=False;
  if Assigned(DwmIsCompositionEnabled) and (DwmIsCompositionEnabled(pfEnabled)=S_OK) then
@@ -77,7 +77,7 @@ end;
 
 Procedure SetCompositionColor(AColor:TColor;Log:TStrings);
 var
-  Params : TColorizationParams;
+  Params: TColorizationParams;
 begin
  if IsAeroEnabled then
  if (Assigned(DwmGetColorizationParameters)) and (Assigned(DwmSetColorizationParameters)) then
@@ -96,7 +96,7 @@ begin
  end;
 end;
 
-procedure IconToBitMap(AIcon:TIcon; var Bitmap : TBitmap);
+procedure IconToBitMap(AIcon:TIcon; var Bitmap: TBitmap);
 begin
   Bitmap.PixelFormat:=pf24bit;
   Bitmap.Width := AIcon.Width;
@@ -104,16 +104,16 @@ begin
   Bitmap.Canvas.Draw(0, 0, AIcon);
 end;
 
-function GetMostUsedColor(Bitmap : TBitmap) : TColor;
+function GetMostUsedColor(Bitmap: TBitmap): TColor;
 type
   pRGBTripleArray = ^TRGBTripleArray;
   TRGBTripleArray = array[0..1023] of TRGBTriple;
 var
-  i, j   : integer;
-  BmpRow : pRGBTripleArray;
-  Colors : TDictionary<TColor,Integer>;
-  Count  : Integer;
-  AColor : TColor;
+  i, j: integer;
+  BmpRow: pRGBTripleArray;
+  Colors: TDictionary<TColor,Integer>;
+  Count: Integer;
+  AColor: TColor;
 begin
    Result := clBlack;
    Colors := TDictionary<TColor,Integer>.Create;
@@ -140,7 +140,7 @@ begin
    end;
 end;
 
-function GetWindowIcon(hWnd: HWND) : HICON;
+function GetWindowIcon(hWnd: HWND): HICON;
 begin
   Result:=GetClassLong(hWnd, GCL_HICONSM);
   if Result=0 then
@@ -156,7 +156,7 @@ end;
 procedure TFrmMain.GetClassInfo(hWnd: HWND);
 var
  lpClassName: PWideChar;
- nMaxCount  : Integer;
+ nMaxCount: Integer;
 begin
   nMaxCount:=1024;
   GetMem(lpClassName,nMaxCount);
@@ -172,15 +172,15 @@ end;
 
 procedure TFrmMain.SetColorFromIcon(hWnd:HWND);
 var
-  hIHandle : HICON;
-  oImg     : TPicture;
-  AColor   : TColor;
-  Bitmap   : TBitmap;
+  hIHandle: HICON;
+  oImg: TPicture;
+  AColor: TColor;
+  Bitmap: TBitmap;
 begin
   hIHandle := GetWindowIcon(hWnd);
   if hIHandle=0 then exit;
   GetClassInfo(hWnd);
-  oImg   := TPicture.Create();
+  oImg := TPicture.Create();
   Bitmap := TBitmap.Create;
   try
     oImg.Icon.Handle := hIHandle;
@@ -211,7 +211,7 @@ end;
 
 procedure TFrmMain.Timer1Timer(Sender: TObject);
 var
- NewHandle : HWND;
+ NewHandle: HWND;
 begin
    NewHandle:=GetForegroundWindow;
    if (NewHandle<>OldHandle) and (NewHandle<>Handle)  then
@@ -227,7 +227,7 @@ begin
   hdwmapi := LoadLibrary('dwmapi.dll');
   if (hdwmapi <> 0) then
   begin
-    @DwmIsCompositionEnabled      := GetProcAddress(hdwmapi, 'DwmIsCompositionEnabled');
+    @DwmIsCompositionEnabled := GetProcAddress(hdwmapi, 'DwmIsCompositionEnabled');
     @DwmGetColorizationParameters := GetProcAddress(hdwmapi, LPCSTR(127));
     @DwmSetColorizationParameters := GetProcAddress(hdwmapi, LPCSTR(131));
   end;

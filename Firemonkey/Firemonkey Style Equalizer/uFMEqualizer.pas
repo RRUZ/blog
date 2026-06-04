@@ -14,28 +14,28 @@ Uses
 
 type
  TFMStyleLine=record
-  Index   : Integer;
-  IsColor : Boolean;
-  Name    : string;
-  Value   : string;
-  Color   : TAlphaColor;
+  Index: Integer;
+  IsColor: Boolean;
+  Name: string;
+  Value: string;
+  Color: TAlphaColor;
  end;
 
  TStyleEqualizer=class
   private
-    FCount  : integer;
-    FLines  : TList<TFMStyleLine>;
-    FMod    : TList<TFMStyleLine>;
-    FResource : TStringList;
+    FCount: integer;
+    FLines: TList<TFMStyleLine>;
+    FMod: TList<TFMStyleLine>;
+    FResource: TStringList;
     FStyleBook: TStyleBook;
     FLayout: TLayout;
-    Context : TRttiContext;
+    Context: TRttiContext;
     procedure SetStyleBook(const Value: TStyleBook);
     procedure FillList;
-    function  PropIsColor(const Name, Value : string):Boolean;
+    function  PropIsColor(const Name, Value: string):Boolean;
  public
-   property StyleBook : TStyleBook read FStyleBook write SetStyleBook;
-   property Layout : TLayout read FLayout write FLayout;
+   property StyleBook: TStyleBook read FStyleBook write SetStyleBook;
+   property Layout: TLayout read FLayout write FLayout;
    procedure Refresh;
    procedure Restore;
    procedure ChangeHSL(dH, dS, dL: Single);
@@ -76,9 +76,9 @@ end;
 
 procedure TStyleEqualizer.FillList;
 var
-  i : integer;
-  ALine : TFMStyleLine;
-  p : integer;
+  i: integer;
+  ALine: TFMStyleLine;
+  p: integer;
 begin
   FLines.Clear;
   FResource.Clear;
@@ -129,9 +129,9 @@ end;
 
 procedure TStyleEqualizer.Refresh;
 Var
- i : Integer;
- s : string;
- Index :  Integer;
+ i: Integer;
+ s: string;
+ Index:  Integer;
 begin
    FStyleBook.Resource.BeginUpdate;
    try
@@ -172,8 +172,8 @@ end;
 
 procedure TStyleEqualizer.ChangeRGB(dR, dG, dB: Byte);
 var
-  i : Integer;
-  v : TFMStyleLine;
+  i: Integer;
+  v: TFMStyleLine;
 
 begin
   for i := 0 to FLines.Count-1 do
@@ -190,8 +190,8 @@ end;
 
 procedure TStyleEqualizer.ChangeHSL(dH, dS, dL: Single);
 var
-  i : Integer;
-  v : TFMStyleLine;
+  i: Integer;
+  v: TFMStyleLine;
 begin
   for i := 0 to FLines.Count-1 do
    if FLines[i].IsColor and (FLines[i].Color<>claNull) then

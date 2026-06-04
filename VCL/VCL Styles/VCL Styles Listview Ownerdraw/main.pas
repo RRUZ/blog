@@ -25,7 +25,7 @@ type
     procedure LvSampleDataDrawItem(Sender: TCustomListView; Item: TListItem;
       Rect: TRect; State: TOwnerDrawState);
   private
-    FColumns  : TDictionary<string, TListColumn>;
+    FColumns: TDictionary<string, TListColumn>;
     procedure AddColumns();
     procedure AddItems();
   public
@@ -45,16 +45,16 @@ uses
 
 procedure TFrmMain.AddColumns;
 
-  Procedure AddColumn(const AColumnName : String; AWidth : Integer; AColumnType : TColumnType);
+  Procedure AddColumn(const AColumnName: String; AWidth: Integer; AColumnType: TColumnType);
   begin
    FColumns.Add(AColumnName, LvSampleData.Columns.Add());
    FColumns[AColumnName].Caption := AColumnName;
-   FColumns[AColumnName].Width   := AWidth;
-   FColumns[AColumnName].Tag     := Integer(AColumnType);
+   FColumns[AColumnName].Width := AWidth;
+   FColumns[AColumnName].Tag := Integer(AColumnType);
   end;
 
 begin
-   FColumns  := TDictionary<string, TListColumn>.Create();
+   FColumns := TDictionary<string, TListColumn>.Create();
    AddColumn('Text', 150, ctText);
    AddColumn('Porc', 100, ctProgress);
    AddColumn('Text2', 150, ctText);
@@ -65,8 +65,8 @@ procedure TFrmMain.AddItems;
 const
  MaxItems = 100;
 var
- LItem : TListItem;
- i : Integer;
+ LItem: TListItem;
+ i: Integer;
 begin
   Randomize;
   LvSampleData.Items.BeginUpdate;
@@ -112,16 +112,16 @@ const
   ListView_Padding = 5;
 var
   LRect, LRect2: TRect;
-  i, p : Integer;
+  i, p: Integer;
   LText: string;
   LSize: TSize;
   LDetails: TThemedElementDetails;
-  LTextFormat : TTextFormatFlags;
-  LColor : TColor;
-  LStyleService : TCustomStyleServices;
-  LColummnType  : TColumnType;
+  LTextFormat: TTextFormatFlags;
+  LColor: TColor;
+  LStyleService: TCustomStyleServices;
+  LColummnType: TColumnType;
 begin
-  LStyleService  := StyleServices;
+  LStyleService := StyleServices;
   if not LStyleService.Enabled then exit;
 
   Sender.Canvas.Brush.Style := bsSolid;
@@ -133,7 +133,7 @@ begin
   for i := 0 to TListView(Sender).Columns.Count - 1 do
   begin
     LColummnType := TColumnType(TListView(Sender).Columns[i].Tag);
-    LRect.Right  := LRect.Left + Sender.Column[i].Width;
+    LRect.Right := LRect.Left + Sender.Column[i].Width;
 
     LText := '';
     if i = 0 then
@@ -171,10 +171,10 @@ begin
                   LSize.cx := GetSystemMetrics(SM_CXMENUCHECK);
                   LSize.cy := GetSystemMetrics(SM_CYMENUCHECK);
 
-                  LRect2.Top    := Rect.Top + (Rect.Bottom - Rect.Top - LSize.cy) div 2;
+                  LRect2.Top := Rect.Top + (Rect.Bottom - Rect.Top - LSize.cy) div 2;
                   LRect2.Bottom := LRect2.Top + LSize.cy;
-                  LRect2.Left   := LRect.Left + ((LRect.Width - LSize.cx) div 2);
-                  LRect2.Right  := LRect2.Left + LSize.cx;
+                  LRect2.Left := LRect.Left + ((LRect.Width - LSize.cx) div 2);
+                  LRect2.Right := LRect2.Left + LSize.cx;
 
                   if (LText = '1') then
                   begin
@@ -202,7 +202,7 @@ begin
                      LStyleService.DrawElement(Sender.Canvas.Handle, LDetails, LRect);
                   end;
 
-                  LRect2   := ResizeRect(LRect, 2, 2, 2, 2);
+                  LRect2 := ResizeRect(LRect, 2, 2, 2, 2);
                   LDetails := LStyleService.GetElementDetails(tpBar);
                   LStyleService.DrawElement(Sender.Canvas.Handle, LDetails, LRect2);
 

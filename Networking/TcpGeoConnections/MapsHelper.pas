@@ -5,15 +5,15 @@ interface
 type
  TWebMapTypes=(Google_Maps,Yahoo_Map,Bing_Map,Open_Streetmap);
 const
- WebMapNames : Array[TWebMapTypes] of string =('Google Maps','Yahoo Maps','Bing Maps','OpenStreetMaps');
+ WebMapNames: Array[TWebMapTypes] of string =('Google Maps','Yahoo Maps','Bing Maps','OpenStreetMaps');
 
- GoogleMapsTypes : Array[0..3] of string =(
+ GoogleMapsTypes: Array[0..3] of string =(
  'HYBRID',
  'ROADMAP',
  'SATELLITE',
  'TERRAIN');
 
- BingMapsTypes : Array[0..4] of string =(
+ BingMapsTypes: Array[0..4] of string =(
  'Hybrid',
  'Road',
  'Aerial',
@@ -21,7 +21,7 @@ const
  'Birdseye'
  );
 
- YahooMapsTypes : Array[0..2] of string =(
+ YahooMapsTypes: Array[0..2] of string =(
  'HYB',
  'SAT',
  'REG'

@@ -29,9 +29,9 @@ SelectDelphiVersion;
 
 procedure TForm9.Button1Click(Sender: TObject);
 var
-  Frm          : TFrmSelDelphiVer;
-  item         : TListItem;
-  DelphiPath   : string;
+  Frm: TFrmSelDelphiVer;
+  item: TListItem;
+  DelphiPath: string;
 begin
   Frm := TFrmSelDelphiVer.Create(Self);
   try

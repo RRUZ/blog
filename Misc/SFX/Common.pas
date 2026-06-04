@@ -7,8 +7,8 @@ uses
 
 type
   TRecSFX= record
-   Size : Integer;
-   Name : Array [0..MAX_PATH] of AnsiChar;
+   Size: Integer;
+   Name: Array [0..MAX_PATH] of AnsiChar;
   end;
 
 implementation

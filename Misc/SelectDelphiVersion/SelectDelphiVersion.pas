@@ -79,7 +79,7 @@ var
   Reg: TRegistry;
 begin
   try
-    Reg         := TRegistry.Create;
+    Reg := TRegistry.Create;
     try
       Reg.RootKey := RootKey;
       Result := Reg.KeyExists(RegPath);
@@ -131,10 +131,10 @@ end;
 { TFrmSelDelphiVer }
 procedure TFrmSelDelphiVer.LoadInstalledVersions;
 Var
- item       : TListItem;
- DelphiComp : TDelphiVersions;
- FileName   : string;
- ImageIndex : Integer;
+ item: TListItem;
+ DelphiComp: TDelphiVersions;
+ FileName: string;
+ ImageIndex: Integer;
 begin
     for DelphiComp := Low(TDelphiVersions) to High(TDelphiVersions) do
     if RegKeyExists(DelphiRegPaths[DelphiComp],HKEY_CURRENT_USER)  then

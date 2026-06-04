@@ -123,7 +123,7 @@ HTMLStr: AnsiString =
 
 procedure TFrmMain.FormCreate(Sender: TObject);
 var
-  aStream     : TMemoryStream;
+  aStream: TMemoryStream;
 begin
    WebBrowser1.Navigate('about:blank');
     if Assigned(WebBrowser1.Document) then
@@ -144,16 +144,16 @@ end;
 
 procedure TFrmMain.WebBrowser1CommandStateChange(ASender: TObject;  Command: Integer; Enable: WordBool);
 var
-  ADocument : IHTMLDocument2;
-  ABody     : IHTMLElement2;
-  Lat : string;
-  Lng : string;
+  ADocument: IHTMLDocument2;
+  ABody: IHTMLElement2;
+  Lat: string;
+  Lng: string;
 
-      function GetIdValue(const Id : string):string;
+      function GetIdValue(const Id: string):string;
       var
-        Tag      : IHTMLElement;
-        TagsList : IHTMLElementCollection;
-        Index    : Integer;
+        Tag: IHTMLElement;
+        TagsList: IHTMLElementCollection;
+        Index: Integer;
       begin
         Result:='';
         TagsList := ABody.getElementsByTagName('input');
@@ -188,7 +188,7 @@ end;
 
 procedure TFrmMain.AddLatLngToList(const Lat, Lng: string);
 var
-  Item  : TListItem;
+  Item: TListItem;
 begin
    if (Lat<>'') and (Lng<>'') then
    begin

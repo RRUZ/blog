@@ -19,12 +19,12 @@ type
 
   PMibTcpRowOwnerPid = ^TMibTcpRowOwnerPid;
   TMibTcpRowOwnerPid  = packed record
-    dwState     : DWORD;
-    dwLocalAddr : DWORD;
-    dwLocalPort : DWORD;
+    dwState: DWORD;
+    dwLocalAddr: DWORD;
+    dwLocalPort: DWORD;
     dwRemoteAddr: DWORD;
     dwRemotePort: DWORD;
-    dwOwningPid : DWORD;
+    dwOwningPid: DWORD;
     end;
 
 

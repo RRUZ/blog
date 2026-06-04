@@ -108,11 +108,11 @@ end;
 procedure TFormMain.GetMapImage;
 var
   StreamData :TMemoryStream;
-  JPEGImage  : TJPEGImage;
+  JPEGImage: TJPEGImage;
 begin
   EditURL.Text:=buildUrl;
   StreamData := TMemoryStream.Create;
-  JPEGImage  := TJPEGImage.Create;
+  JPEGImage := TJPEGImage.Create;
   try
     try
      idhttp1.Get(EditURL.Text, StreamData);
@@ -125,7 +125,7 @@ begin
      LY := (ImageMap.Height - ScrollBoxMap.ClientHeight) * -1;
 
      ImageMap.Picture.Assign(JPEGImage);
-    Except On E : Exception Do
+    Except On E: Exception Do
      MessageDlg('Exception: '+E.Message,mtError, [mbOK], 0);
     End;
   finally
@@ -144,7 +144,7 @@ procedure TFormMain.IdHTTP10WorkBegin(ASender: TObject; AWorkMode: TWorkMode;
   AWorkCountMax: Integer);
 begin
   ProgressBar1.Position := 0;
-  ProgressBar1.Max      := IdHTTP1.Response.ContentLength;
+  ProgressBar1.Max := IdHTTP1.Response.ContentLength;
 end;
 
 procedure TFormMain.IdHTTP10WorkEnd(ASender: TObject; AWorkMode: TWorkMode);

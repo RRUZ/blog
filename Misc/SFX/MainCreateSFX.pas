@@ -23,8 +23,8 @@ type
     procedure ButtonSelectClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
-    FSrcFileName   : string;
-    FSfxFileName   : string;
+    FSrcFileName: string;
+    FSfxFileName: string;
     function  CreateStub:Boolean;
     function  GetCompressionLevel: TCompressionLevel;
     procedure CreateSFX;
@@ -61,13 +61,13 @@ end;
 
 procedure TFrmCreateSFX.CreateSFX;
 var
-  SrcFileStream   : TFileStream;
+  SrcFileStream: TFileStream;
   CompressedStream: TMemoryStream;
-  hDestRes        : THANDLE;
-  Compressor      : TCompressionStream;
-  RecSFX          : TRecSFX;
+  hDestRes: THANDLE;
+  Compressor: TCompressionStream;
+  RecSFX: TRecSFX;
 begin
-  SrcFileStream      := TFileStream.Create(FSrcFileName,fmOpenRead or fmShareDenyNone);
+  SrcFileStream := TFileStream.Create(FSrcFileName,fmOpenRead or fmShareDenyNone);
   ProgressBarSfx.Max := SrcFileStream.Size;
  try
   try
@@ -118,7 +118,7 @@ begin
   finally
     SrcFileStream.Free;
   end;
- except on e : exception do
+ except on e: exception do
    Application.MessageBox(PAnsiChar(e.Message),'Error',MB_OK+MB_ICONERROR);
  end;
 end;
@@ -153,7 +153,7 @@ end;
 
 function TFrmCreateSFX.GetCompressionLevel: TCompressionLevel;
 var
- i : Integer;
+ i: Integer;
 begin
   Result:=clMax;
     for i:= 0 to ComponentCount - 1 do

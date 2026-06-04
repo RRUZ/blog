@@ -57,17 +57,17 @@ type
 
     //Added functions(properties)
     //Indicates the URL to the application's executable.
-    function executableURL : NSURL; cdecl;//@property (readonly) NSURL *executableURL;
+    function executableURL: NSURL; cdecl;//@property (readonly) NSURL *executableURL;
     //Indicates the name of the application.  This is dependent on the current localization of the referenced app, and is suitable for presentation to the user.
-    function localizedName : NSString; cdecl;//@property (readonly) NSString *localizedName;
+    function localizedName: NSString; cdecl;//@property (readonly) NSString *localizedName;
     //Indicates the URL to the application's bundle, or nil if the application does not have a bundle.
-    function bundleURL : NSURL; cdecl;//@property (readonly) NSURL *bundleURL;
+    function bundleURL: NSURL; cdecl;//@property (readonly) NSURL *bundleURL;
     //Indicates the CFBundleIdentifier of the application, or nil if the application does not have an Info.plist.
-    function bundleIdentifier : NSString; cdecl;//@property (readonly) NSString *bundleIdentifier;
+    function bundleIdentifier: NSString; cdecl;//@property (readonly) NSString *bundleIdentifier;
     //Indicates the date when the application was launched.  This property is not available for all applications.  Specifically, it is not available for applications that were launched without going through LaunchServices.   */
-    function launchDate : NSDate;cdecl;//@property (readonly) NSDate *launchDate;
+    function launchDate: NSDate;cdecl;//@property (readonly) NSDate *launchDate;
     //Returns the icon of the application.
-    function icon : NSImage;cdecl;//@property (readonly) NSImage *icon;
+    function icon: NSImage;cdecl;//@property (readonly) NSImage *icon;
   end;
   TNSRunningApplicationEx = class(TOCGenericImport<NSRunningApplicationClass, NSRunningApplicationEx>)  end;
 
@@ -78,11 +78,11 @@ end;
 
 procedure TForm25.ListRunningApps;
 var
-  LWorkSpace : NSWorkspace;
-  LApp       : NSRunningApplicationEx;
-  LFormatter : NSDateFormatter;
-  i : integer;
-  LArray     : NSArray;
+  LWorkSpace: NSWorkspace;
+  LApp: NSRunningApplicationEx;
+  LFormatter: NSDateFormatter;
+  i: integer;
+  LArray: NSArray;
 begin
   LWorkSpace:=TNSWorkspace.create;//or TNsWorkspace.Wrap(TNsWorkSpace.OCClass.sharedWorkspace);
   LArray:=LWorkSpace.runningApplications;
@@ -110,9 +110,9 @@ begin
        StringGrid1.Cells[5,i]:=string(LApp.bundleURL.path.UTF8String);
 
       case LApp.executableArchitecture of
-        NSBundleExecutableArchitectureI386  :   StringGrid1.Cells[6,i]:='I386';
-        NSBundleExecutableArchitecturePPC   :   StringGrid1.Cells[6,i]:='PPC';
-        NSBundleExecutableArchitecturePPC64 :   StringGrid1.Cells[6,i]:='PPC64';
+        NSBundleExecutableArchitectureI386:   StringGrid1.Cells[6,i]:='I386';
+        NSBundleExecutableArchitecturePPC:   StringGrid1.Cells[6,i]:='PPC';
+        NSBundleExecutableArchitecturePPC64:   StringGrid1.Cells[6,i]:='PPC64';
         NSBundleExecutableArchitectureX86_64:   StringGrid1.Cells[6,i]:='X86_64';
       end;
    end;

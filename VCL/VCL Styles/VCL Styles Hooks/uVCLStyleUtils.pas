@@ -13,8 +13,8 @@ type
 
 Procedure ApplyEmptyVCLStyleHook(ControlClass :TClass);
 Procedure RemoveEmptyVCLStyleHook(ControlClass :TClass);
-function  IsStyleHookRegistered(ControlClass: TClass; StyleHookClass: TStyleHookClass) : Boolean;
-function  GetRegisteredStylesHooks(ControlClass: TClass) : TStyleHookList;
+function  IsStyleHookRegistered(ControlClass: TClass; StyleHookClass: TStyleHookClass): Boolean;
+function  GetRegisteredStylesHooks(ControlClass: TClass): TStyleHookList;
 
 implementation
 
@@ -25,7 +25,7 @@ type
   TStyleHookDictionary = TDictionary<TClass, TStyleHookList>;
   TCustomStyleEngineHelper = Class Helper for TCustomStyleEngine
   public
-    class function GetRegisteredStyleHooks : TStyleHookDictionary;
+    class function GetRegisteredStyleHooks: TStyleHookDictionary;
   end;
 
 
@@ -34,9 +34,9 @@ begin
   Result:= Self.FRegisteredStyleHooks;
 end;
 
-function  IsStyleHookRegistered(ControlClass: TClass; StyleHookClass: TStyleHookClass) : Boolean;
+function  IsStyleHookRegistered(ControlClass: TClass; StyleHookClass: TStyleHookClass): Boolean;
 var
-  List : TStyleHookList;
+  List: TStyleHookList;
 begin
  Result:=False;
     if TCustomStyleEngine.GetRegisteredStyleHooks.ContainsKey(ControlClass) then
@@ -46,7 +46,7 @@ begin
     end;
 end;
 
-function  GetRegisteredStylesHooks(ControlClass: TClass) : TStyleHookList;
+function  GetRegisteredStylesHooks(ControlClass: TClass): TStyleHookList;
 begin
  Result:=nil;
     if TCustomStyleEngine.GetRegisteredStyleHooks.ContainsKey(ControlClass) then

@@ -9,13 +9,13 @@ uses
   type
      TRttiPropertyHelper = class helper for TRttiProperty
   private
-    function GetSetterField  : TRttiField;
-    function GetGetterField  : TRttiField;
+    function GetSetterField: TRttiField;
+    function GetGetterField: TRttiField;
   public
-    property SetterField : TRttiField read GetSetterField;
-    property GetterField : TRttiField read GetGetterField;
-    function SetterMethod (Instance : TObject) : TRttiMethod;
-    function GetterMethod (Instance : TObject) : TRttiMethod;
+    property SetterField: TRttiField read GetSetterField;
+    property GetterField: TRttiField read GetGetterField;
+    function SetterMethod (Instance: TObject): TRttiMethod;
+    function GetterMethod (Instance: TObject): TRttiMethod;
   end;
 
 
@@ -43,12 +43,12 @@ begin
 end;
 
 
-function GetPropGetterMethod(Instance: TObject; AProp : TRttiProperty) : TRttiMethod;
+function GetPropGetterMethod(Instance: TObject; AProp: TRttiProperty): TRttiMethod;
 var
-  LPropInfo : PPropInfo;
+  LPropInfo: PPropInfo;
   LMethod: TRttiMethod;
-  LCodeAddress : Pointer;
-  LType : TRttiType;
+  LCodeAddress: Pointer;
+  LType: TRttiType;
   LocalContext: TRttiContext;
 begin
   Result:=nil;
@@ -73,12 +73,12 @@ begin
   end;
 end;
 
-function GetPropSetterMethod(Instance: TObject; AProp : TRttiProperty) : TRttiMethod;
+function GetPropSetterMethod(Instance: TObject; AProp: TRttiProperty): TRttiMethod;
 var
-  LPropInfo : PPropInfo;
+  LPropInfo: PPropInfo;
   LMethod: TRttiMethod;
-  LCodeAddress : Pointer;
-  LType : TRttiType;
+  LCodeAddress: Pointer;
+  LType: TRttiType;
   LocalContext: TRttiContext;
 begin
   Result:=nil;
@@ -102,11 +102,11 @@ begin
   end;
 end;
 
-function GetPropGetterField(AProp : TRttiProperty) : TRttiField;
+function GetPropGetterField(AProp: TRttiProperty): TRttiField;
 var
-  LPropInfo : PPropInfo;
+  LPropInfo: PPropInfo;
   LField: TRttiField;
-  LOffset : Integer;
+  LOffset: Integer;
 begin
   Result:=nil;
   //Is a readable property?
@@ -128,11 +128,11 @@ begin
   end;
 end;
 
-function GetPropSetterField(AProp : TRttiProperty) : TRttiField;
+function GetPropSetterField(AProp: TRttiProperty): TRttiField;
 var
-  LPropInfo : PPropInfo;
+  LPropInfo: PPropInfo;
   LField: TRttiField;
-  LOffset : Integer;
+  LOffset: Integer;
 begin
   Result:=nil;
   //Is a writable property?

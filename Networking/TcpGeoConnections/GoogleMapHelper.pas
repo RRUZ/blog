@@ -119,13 +119,13 @@ UrlGooleMapsImage_orange='http://labs.google.com/ridefinder/images/mm_20_orange.
 UrlGooleMapsImage_gray='http://labs.google.com/ridefinder/images/mm_20_gray.png';
 UrlGooleMapsImage_brown='http://labs.google.com/ridefinder/images/mm_20_brown.png';
 
-function GetUrlGooleMapsImageLetter(Letter: Char) : string;
+function GetUrlGooleMapsImageLetter(Letter: Char): string;
 
 implementation
 uses
  SysUtils;
 
-function GetUrlGooleMapsImageLetter(Letter: Char) : string;
+function GetUrlGooleMapsImageLetter(Letter: Char): string;
 begin
  Result:=Format(UrlGooleMapsImageLetter,[Letter]);
 

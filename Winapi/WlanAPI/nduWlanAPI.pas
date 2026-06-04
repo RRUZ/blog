@@ -462,7 +462,7 @@ type
   Pndu_WLAN_SECURITY_ATTRIBUTES = ^Tndu_WLAN_SECURITY_ATTRIBUTES;
   Tndu_WLAN_SECURITY_ATTRIBUTES = record
   	bSecurityEnabled: Bool;
-    bOneXEnabled : Bool;
+    bOneXEnabled: Bool;
     dot11AuthAlgorithm: Tndu_DOT11_AUTH_ALGORITHM;
     dot11CipherAlgorithm: Tndu_DOT11_CIPHER_ALGORITHM;
   end;
