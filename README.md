@@ -1,3 +1,5 @@
-# blog
-Source code for the posts of https://theroadtodelphi.wordpress.com
-![](https://github.com/RRUZ/blog/blob/master/Images/blog_header_image.jpg)
+<p align="center">
+  <a href="https://theroadtodelphi.wordpress.com">
+    <img src="https://github.com/RRUZ/blog/blob/master/images/banner_theroadtodelphi_blog.png?raw=true" alt="The Road to Delphi Blog"/>
+  </a>
+</p>
