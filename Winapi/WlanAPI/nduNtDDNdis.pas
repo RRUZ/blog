@@ -3,10 +3,10 @@ unit nduNtDDNdis;
 interface
 
 uses
-	nduCType;
+  nduCType;
 
 type
-	Pndu_NDIS_OBJECT_HEADER = ^Tndu_NDIS_OBJECT_HEADER;
+  Pndu_NDIS_OBJECT_HEADER = ^Tndu_NDIS_OBJECT_HEADER;
   Tndu_NDIS_OBJECT_HEADER = packed record
   	aType: uchar;
     Revision: uchar;

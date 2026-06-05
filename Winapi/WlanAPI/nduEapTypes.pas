@@ -3,10 +3,10 @@ unit nduEapTypes;
 interface
 
 uses
-	nduCType, Classes, Windows;
+  nduCType, Classes, Windows;
 
 const
-	NDU_eapPropCipherSuiteNegotiation 						= $00000001;
+  NDU_eapPropCipherSuiteNegotiation 						= $00000001;
   NDU_eapPropMutualAuth													= $00000002;
   NDU_eapPropIntegrity													= $00000004;
   NDU_eapPropReplayProtection										= $00000008;
@@ -33,7 +33,7 @@ const
   NDU_EAP_VALUENAME_PROPERTIES									= 'Properties';
 
 type
-	NDU_EAP_SESSIONID = DWORD;
+  NDU_EAP_SESSIONID = DWORD;
 
   Tndu_EAP_TYPE = record
   	atype: Byte;

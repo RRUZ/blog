@@ -5,8 +5,8 @@ unit nduWinNT;
 interface
 
 const
-	//...
-	NDU_DELETE       	= $00010000;
+  //...
+  NDU_DELETE       	= $00010000;
   NDU_READ_CONTROL 	= $00020000;
 
   NDU_STANDARD_RIGHTS_READ		= (NDU_READ_CONTROL);

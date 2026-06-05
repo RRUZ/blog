@@ -6,7 +6,7 @@ uses
   nduCType, nduL2cmn, nduWlanTypes, nduWinDot11, nduWinNT, Windows, nduEapTypes;
 
 const
-	NDU_WLAN_API_VERSION 						= 1;
+  NDU_WLAN_API_VERSION 						= 1;
   NDU_WLAN_MAX_NAME_LENGTH 				= NDU_L2_PROFILE_MAX_NAME_LENGTH;
 
   //Profil Flags
@@ -18,8 +18,8 @@ const
   WLAN_MAX_PHY_TYPE_NUMBER	= 8;
 
 type
-	Pndu_WLAN_PROFILE_INFO = ^Tndu_WLAN_PROFILE_INFO;
-	Tndu_WLAN_PROFILE_INFO = record
+  Pndu_WLAN_PROFILE_INFO = ^Tndu_WLAN_PROFILE_INFO;
+  Tndu_WLAN_PROFILE_INFO = record
   	strProfileName: array[0..NDU_WLAN_MAX_NAME_LENGTH - 1] of wchar;
     dwFlags: DWORD;
   end;
@@ -31,12 +31,12 @@ type
   end;
 
 const
-	NDU_DOT11_PSD_IE_MAX_DATA_SIZE 			= 220;		// 255 - 6 - 2 - FORMAT ID
+  NDU_DOT11_PSD_IE_MAX_DATA_SIZE 			= 220;		// 255 - 6 - 2 - FORMAT ID
   NDU_DOT11_PSD_IE_MAX_ENTRY_NUMBER		= 10; 		// 10 enties at most
 
 type
-	Pndu_WLAN_RAW_DATA = ^Tndu_WLAN_RAW_DATA;
-	Tndu_WLAN_RAW_DATA = record
+  Pndu_WLAN_RAW_DATA = ^Tndu_WLAN_RAW_DATA;
+  Tndu_WLAN_RAW_DATA = record
   	dwDataSize: DWORD;
     DataBlob: array[0..0] of Byte;
   end;
@@ -65,7 +65,7 @@ type
   Pndu_WLAN_REASON_CODE = ^Tndu_WLAN_REASON_CODE;
 
 const
-	NDU_WLAN_REASON_CODE_SUCCESS 						= NDU_L2_REASON_CODE_SUCCESS;
+  NDU_WLAN_REASON_CODE_SUCCESS 						= NDU_L2_REASON_CODE_SUCCESS;
   NDU_WLAN_REASON_CODE_UNKNOWN						= NDU_L2_REASON_CODE_UNKNOWN;
 
   NDU_WLAN_REASON_CODE_RANGE_SIZE					= NDU_L2_REASON_CODE_GROUP_SIZE;
@@ -89,7 +89,7 @@ const
   	(NDU_WLAN_REASON_CODE_PROFILE_BASE + NDU_WLAN_REASON_CODE_RANGE_SIZE - 1);
 
   // range for MSM
-	//
+  //
   NDU_WLAN_REASON_CODE_MSM_BASE 					= NDU_L2_REASON_CODE_DOT11_MSM_BASE;
 
   NDU_WLAN_REASON_CODE_MSM_CONNECT_BASE 	=
@@ -99,7 +99,7 @@ const
   	(NDU_WLAN_REASON_CODE_MSM_BASE + NDU_WLAN_REASON_CODE_RANGE_SIZE - 1);
 
   // range for MSMSEC
-	//
+  //
   NDU_WLAN_REASON_CODE_MSMSEC_BASE				=
   	NDU_L2_REASON_CODE_DOT11_SECURITY_BASE;
 
@@ -110,14 +110,14 @@ const
   	(NDU_WLAN_REASON_CODE_MSMSEC_BASE + NDU_WLAN_REASON_CODE_RANGE_SIZE - 1);
 
   // AC network incompatible reason codes
-	//
+  //
   NDU_WLAN_REASON_CODE_NETWORK_NOT_COMPATIBLE =
   	(NDU_WLAN_REASON_CODE_AC_BASE + 1);
   NDU_WLAN_REASON_CODE_PROFILE_NOT_COMPATIBLE =
   	(NDU_WLAN_REASON_CODE_AC_BASE + 2);
 
   // AC connect reason code
-	//
+  //
   NDU_WLAN_REASON_CODE_NO_AUTO_CONNECTION	=
   	(NDU_WLAN_REASON_CODE_AC_CONNECT_BASE + 1);
   NDU_WLAN_REASON_CODE_NOT_VISIBLE =
@@ -148,7 +148,7 @@ const
   	(NDU_WLAN_REASON_CODE_AC_CONNECT_BASE + 14);
 
   // Profile validation errors
-	//
+  //
   NDU_WLAN_REASON_CODE_INVALID_PROFILE_SCHEMA =
     (NDU_WLAN_REASON_CODE_PROFILE_BASE + 1);
   NDU_WLAN_REASON_CODE_PROFILE_MISSING =
@@ -189,7 +189,7 @@ const
   	(NDU_WLAN_REASON_CODE_PROFILE_BASE + 19);
 
   // MSM network incompatible reasons
-	//
+  //
   NDU_WLAN_REASON_CODE_UNSUPPORTED_SECURITY_SET_BY_OS =
   	(NDU_WLAN_REASON_CODE_MSM_BASE + 1);
   NDU_WLAN_REASON_CODE_UNSUPPORTED_SECURITY_SET =
@@ -202,8 +202,8 @@ const
   	(NDU_WLAN_REASON_CODE_MSM_BASE + 5);
 
   // MSM connection failure reasons, to be defined
-	// failure reason codes
-	//
+  // failure reason codes
+  //
   NDU_WLAN_REASON_CODE_USER_CANCELLED =
   	(NDU_WLAN_REASON_CODE_MSM_CONNECT_BASE + 1);
   NDU_WLAN_REASON_CODE_ASSOCIATION_FAILURE =
@@ -240,7 +240,7 @@ const
   	(NDU_WLAN_REASON_CODE_MSM_CONNECT_BASE + 17);
 
   // MSMSEC reason codes
-	//
+  //
   NDU_WLAN_REASON_CODE_MSMSEC_MIN = NDU_WLAN_REASON_CODE_MSMSEC_BASE;
   NDU_WLAN_REASON_CODE_MSMSEC_PROFILE_INVALID_KEY_INDEX =
   	(NDU_WLAN_REASON_CODE_MSMSEC_BASE + 1);
@@ -346,7 +346,7 @@ const
   NDU_WLAN_REASON_CODE_MSMSEC_MAX =	NDU_WLAN_REASON_CODE_MSMSEC_END;
 
 type
-	Tndu_WLAN_SIGNAL_QUALITY = ulong;
+  Tndu_WLAN_SIGNAL_QUALITY = ulong;
   Pndu_WLAN_SIGNAL_QUALITY = ^Tndu_WLAN_SIGNAL_QUALITY;
 
 const
@@ -357,15 +357,15 @@ const
   NDU_WLAN_AVAILABLE_NETWORK_INCLUDE_ALL_MANUAL_HIDDEN_PROFILES	= $00000002;
 
 type
-	Pndu_WLAN_RATE_SET = ^Tndu_WLAN_RATE_SET;
+  Pndu_WLAN_RATE_SET = ^Tndu_WLAN_RATE_SET;
   Tndu_WLAN_RATE_SET = record
   	uRateSetLength: ulong;
     usRateSet: array[0..NDU_DOT11_RATE_SET_MAX_LENGTH - 1] of ushort;
   end;
 
-	Pndu_WLAN_AVAILABLE_NETWORK = ^Tndu_WLAN_AVAILABLE_NETWORK;
+  Pndu_WLAN_AVAILABLE_NETWORK = ^Tndu_WLAN_AVAILABLE_NETWORK;
   {
-	Tndu_WLAN_AVAILABLE_NETWORK = record
+  Tndu_WLAN_AVAILABLE_NETWORK = record
     strProfileName: array[0..NDU_WLAN_MAX_NAME_LENGTH - 1] of wchar;
     dot11Ssid: Tndu_DOT11_SSID;
     dot11BssType: Tndu_DOT11_BSS_TYPE;
@@ -485,12 +485,12 @@ type
     dot11_radio_state_off);
 
 const
-	// the maximum number of PHYs supported by a NIC
-	NDU_WLAN_MAX_PHY_INDEX = 63;
+  // the maximum number of PHYs supported by a NIC
+  NDU_WLAN_MAX_PHY_INDEX = 63;
 
 type
-	Pndu_WLAN_PHY_RADIO_STATE = ^Tndu_WLAN_PHY_RADIO_STATE;
-	Tndu_WLAN_PHY_RADIO_STATE = record
+  Pndu_WLAN_PHY_RADIO_STATE = ^Tndu_WLAN_PHY_RADIO_STATE;
+  Tndu_WLAN_PHY_RADIO_STATE = record
     dwPhyIndex: DWORD;
     dot11SoftwareRadioState: Tndu_DOT11_RADIO_STATE;
     dot11HardwareRadioState: Tndu_DOT11_RADIO_STATE;
@@ -572,12 +572,12 @@ type
     wlan_power_setting_invalid);
 
 const
-	NDU_WLAN_CONNECTION_HIDDEN_NETWORK 		= $00000001;
+  NDU_WLAN_CONNECTION_HIDDEN_NETWORK 		= $00000001;
   NDU_WLAN_CONNECTION_ADHOC_JOIN_ONLY 	= $00000002;
 
 type
-	Pndu_WLAN_CONNECTION_PARAMETERS = ^Tndu_WLAN_CONNECTION_PARAMETERS;
-	Tndu_WLAN_CONNECTION_PARAMETERS = record
+  Pndu_WLAN_CONNECTION_PARAMETERS = ^Tndu_WLAN_CONNECTION_PARAMETERS;
+  Tndu_WLAN_CONNECTION_PARAMETERS = record
   	wlanConnectionMode: Tndu_WLAN_CONNECTION_MODE;
     strProfile: LPCTSTR;
     pDot11Ssid: Pndu_DOT11_SSID;
@@ -611,7 +611,7 @@ type
   end;
 
 const
-	NDU_WLAN_NOTIFICATION_SOURCE_NONE = NDU_L2_NOTIFICATION_SOURCE_NONE;
+  NDU_WLAN_NOTIFICATION_SOURCE_NONE = NDU_L2_NOTIFICATION_SOURCE_NONE;
   NDU_WLAN_NOTIFICATION_SOURCE_ALL 	= NDU_L2_NOTIFICATION_SOURCE_ALL;
 
   NDU_WLAN_NOTIFICATION_SOURCE_ACM	= NDU_L2_NOTIFICATION_SOURCE_WLAN_ACM;
@@ -620,9 +620,9 @@ const
   NDU_WLAN_NOTIFICATION_SOURCE_IHV	= NDU_L2_NOTIFICATION_SOURCE_WLAN_IHV;
 
 type
-	{$MINENUMSIZE 4}
-	Pndu_WLAN_NOTIFICATION_ACM = ^Tndu_WLAN_NOTIFICATION_ACM;
-	Tndu_WLAN_NOTIFICATION_ACM = (
+  {$MINENUMSIZE 4}
+  Pndu_WLAN_NOTIFICATION_ACM = ^Tndu_WLAN_NOTIFICATION_ACM;
+  Tndu_WLAN_NOTIFICATION_ACM = (
   	wlan_notification_acm_start = NDU_L2_NOTIFICATION_CODE_PUBLIC_BEGIN,
     wlan_notification_acm_autoconf_enabled,
     wlan_notification_acm_autoconf_disabled,
@@ -791,8 +791,8 @@ const
     NDU_WRITE_DAC);
 
 type
-	{$MINENUMSIZE 4}
-	Pndu_WLAN_SECURABLE_OBJECT = ^Tndu_WLAN_SECURABLE_OBJECT;
+  {$MINENUMSIZE 4}
+  Pndu_WLAN_SECURABLE_OBJECT = ^Tndu_WLAN_SECURABLE_OBJECT;
   Tndu_WLAN_SECURABLE_OBJECT = (
   	wlan_secure_permit_list = 0,
     wlan_secure_deny_list,
@@ -812,15 +812,15 @@ type
     NDU_WLAN_SECURABLE_OBJECT_COUNT);
 
 const
-	wlan_api_dll = 'wlanapi.dll';
+  wlan_api_dll = 'wlanapi.dll';
 
-	function WlanOpenHandle(dwClientVersion: DWORD; pReserved: PVOID;
+  function WlanOpenHandle(dwClientVersion: DWORD; pReserved: PVOID;
   	pdwNegotiatedVersion: PWord; phClientHandle: PHandle): DWORD; stdcall;
 
   function WlanCloseHandle(hClientHandle: Handle;
   	pReserved: PVOID): DWORD; stdcall;
 
-	function WlanEnumInterfaces(hClientHandle: Handle;
+  function WlanEnumInterfaces(hClientHandle: Handle;
   	pReserved: PVOID; ppInterfaceList: PPndu_WLAN_INTERFACE_INFO_LIST
     ): DWORD; stdcall;
 
@@ -855,7 +855,7 @@ const
   	const pInterfaceGuid: PGUID; const pDot11Ssid: Pndu_DOT11_SSID;
     const pIeData: Pndu_WLAN_RAW_DATA; pReserved: PVOID): DWORD; stdcall;
 
-	function WlanGetAvailableNetworkList(hClientHandle: Handle;
+  function WlanGetAvailableNetworkList(hClientHandle: Handle;
   	const pInterfaceGuid: PGUID; dwFlags: DWORD; pReserved: PVOID;
     var pAvailableNetworkList: Pndu_WLAN_AVAILABLE_NETWORK_LIST): DWORD; stdcall;
 
@@ -951,13 +951,13 @@ const
     strFormat: LPCWSTR; pReserved: PVOID;
     ppPsdIEDataList: PPndu_WLAN_RAW_DATA_LIST): DWORD; stdcall;
 
-	function WlanReasonCodeToString(dwReasonCode: DWORD;
+  function WlanReasonCodeToString(dwReasonCode: DWORD;
   	dwBufferSize: DWORD; pStringBuffer: PWChar;
     pReserved: PVOID): DWORD; stdcall;
 
   function WlanAllocateMemory(dwMemorySize: DWORD): pvoid; stdcall;
 
-	function WlanFreeMemory(pMemory: PVOID): PVOID; stdcall;
+  function WlanFreeMemory(pMemory: PVOID): PVOID; stdcall;
 
   function WlanSetSecuritySettings(hClientHandle: Handle;
   	SecurableObject: Tndu_WLAN_SECURABLE_OBJECT;
@@ -968,14 +968,14 @@ const
     pstrCurrentSDDL: PLPWSTR; pdwGrantedAccess: PWORD): DWORD; stdcall;
 
 const
-	NDU_WLAN_UI_API_VERSION 					= 1;
+  NDU_WLAN_UI_API_VERSION 					= 1;
   NDU_WLAN_UI_API_INITIAL_VERSION		= 1;
 
 type
-	Pndu_WL_DISPLAY_PAGES = ^Tndu_WL_DISPLAY_PAGES;
-	Tndu_WL_DISPLAY_PAGES = (
+  Pndu_WL_DISPLAY_PAGES = ^Tndu_WL_DISPLAY_PAGES;
+  Tndu_WL_DISPLAY_PAGES = (
   	WLConnectionPage,
-		WLSecurityPage);
+    WLSecurityPage);
 
   function WlanUIEditProfile(dwClientVersion: DWORD;
   	wstrProfileName: LPCWSTR; pInterfaceGuid: PGUID;
@@ -985,7 +985,7 @@ type
 
 implementation
 
-	function WlanOpenHandle;								external  wlan_api_dll	name	'WlanOpenHandle';
+  function WlanOpenHandle;								external  wlan_api_dll	name	'WlanOpenHandle';
   function WlanCloseHandle;								external	wlan_api_dll	name	'WlanCloseHandle';
   function WlanEnumInterfaces; 						external	wlan_api_dll	name	'WlanEnumInterfaces';
   function WlanSetAutoConfigParameter;		external	wlan_api_dll	name	'WlanSetAutoConfigParameter';

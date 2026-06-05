@@ -3,10 +3,10 @@ unit nduWinDot11;
 interface
 
 uses
-	nduCType, nduWlanTypes, nduNtDDNdis;
+  nduCType, nduWlanTypes, nduNtDDNdis;
 
 type
-	Tndu_DOT11_MAC_ADDRESS = array[0..5] of uchar;
+  Tndu_DOT11_MAC_ADDRESS = array[0..5] of uchar;
   Pndu_DOT11_MAC_ADDRESS = ^Tndu_DOT11_MAC_ADDRESS;
 
   Pndu_DOT11_BSSID_LIST = ^Tndu_DOT11_BSSID_LIST;
@@ -35,11 +35,11 @@ type
     dot11_phy_type_IHV_end = $ffffffff);
 
 const
-	NDU_DOT11_RATE_SET_MAX_LENGTH = 126; // 126 bytes
+  NDU_DOT11_RATE_SET_MAX_LENGTH = 126; // 126 bytes
 
 type
-	Pndu_DOT11_RATE_SET = ^Tndu_DOT11_RATE_SET;
-	Tndu_DOT11_RATE_SET = record
+  Pndu_DOT11_RATE_SET = ^Tndu_DOT11_RATE_SET;
+  Tndu_DOT11_RATE_SET = record
   	uRateSetLength: ulong;
     ucRateSet: array[0..NDU_DOT11_RATE_SET_MAX_LENGTH - 1] of uchar;
   end;

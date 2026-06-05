@@ -1,6 +1,6 @@
 {*------------------------------------------------------------------------------
   C Typen Deklaration (Übersetztung der Variabeln von C in Delphi)
-	@Author    nitschchedu
+  @Author    nitschchedu
   @Version   1 Alpha
   @Todo      C Typen Convertation
 -------------------------------------------------------------------------------}
@@ -10,20 +10,20 @@ unit nduCType;
 interface
 
 uses
-	Windows, Classes;
+  Windows, Classes;
 
 type
-	//*** Übersetztung der Variabeln von C in Delphi ***//
+  //*** Übersetztung der Variabeln von C in Delphi ***//
   //*** ------------------------------------------ ***//
   //C                 //Delphi        //Komentar
   //*** ------------------------------------------ ***//
-	Bool 							= LongBool;  			///C Bool
+  Bool 							= LongBool;  			///C Bool
   Int 							= Integer;				///C Int
   unsigned_short 		= Word;						///C unsigned short
   ushort						= Word;						///C ushort
   short							= Smallint;				///C short
   signed_short			= Smallint;				///C signed short
-	UINT							= Cardinal;				///C UINT
+  UINT							= Cardinal;				///C UINT
   DWORD							= Cardinal;				///C DWORD
   unsigned_long			= Cardinal;				///C unsigned short
   unsigned_long_int	= Cardinal;				///C unsigned short int
@@ -76,7 +76,7 @@ type
   end;
 
   SecHandle = _SecHandle;
-	PSecHandle = ^SecHandle;
+  PSecHandle = ^SecHandle;
 
 implementation
 

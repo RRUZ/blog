@@ -1,5 +1,5 @@
 {
-	Übersetzt aus l2cmn.h vom Windows SDK
+  Übersetzt aus l2cmn.h vom Windows SDK
 }
 
 unit nduL2cmn;
@@ -10,8 +10,8 @@ uses
   nduCType;
 
 const
-	//Profil Name Max Länge, in Char Zeichen
-	NDU_L2_PROFILE_MAX_NAME_LENGTH 											= 256;
+  //Profil Name Max Länge, in Char Zeichen
+  NDU_L2_PROFILE_MAX_NAME_LENGTH 											= 256;
 
   NDU_L2_NOTIFICATION_SOURCE_NONE 										= 0;
   NDU_L2_NOTIFICATION_SOURCE_DOT3_AUTO_CONFIG        	= $00000001;
@@ -61,8 +61,8 @@ const
   NDU_L2_REASON_CODE_PROFILE_MISSING									= $00000001;
 
 type
-	Pndu_L2_NOTIFICATION_DATA = ^Tndu_L2_NOTIFICATION_DATA;
-	Tndu_L2_NOTIFICATION_DATA = record
+  Pndu_L2_NOTIFICATION_DATA = ^Tndu_L2_NOTIFICATION_DATA;
+  Tndu_L2_NOTIFICATION_DATA = record
   	NotificationSource: DWORD;
     NotificationCode: DWORD;
     InterfaceGuid: TGUID;
